@@ -1,0 +1,73 @@
+page-login,
+.login .scroll-content {
+  padding-left: 35px !important;
+  padding-right: 35px !important;
+}
+.checkboxline .item-inner{
+  border-bottom:none !important;
+}
+
+.inputbox .item-inner{
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background: #6b6c6d;
+  color: white;
+  border-bottom:none !important;
+}
+.item-md {
+  background-color: transparent !important;
+  padding-left: 16px !important;
+    padding-right: 16px !important;
+}
+.input-has-focus{
+  border-color: #6b6c6d !important;
+}
+.item-md {
+  color:white !important;
+}
+.text-md-secondary {
+  color: #f8c653 !important;
+}
+.button-md-dark {
+  color: #fff;
+  background-color: #31adf1;
+  width: 50%;
+  height: 40px !important;
+  margin-bottom: 0px !important;
+    margin-top: 0px !important;
+    margin-right: 0px !important;
+    
+}
+.checkboxline .item-inner{
+  padding-right: 0px !important;
+}
+.logged{
+  white-space: inherit !important;
+  flex: 1 !important;
+  font-size: 14px;
+    font-weight: 500;
+    margin-right: 25px;
+}
+.checkbox-md .checkbox-icon {
+  border-radius: 5px !important;
+  width: 25px !important;
+  height: 25px !important;
+  background-color: #6b6c6d !important;
+  
+}
+
+.checkbox-md .checkbox-checked {
+  border-color: #6b6c6d !important;
+  background-color: #6b6c6d !important;
+}
+.checkbox-md .checkbox-checked .checkbox-inner {
+  left: 6px !important;
+  top: 0px !important;
+  width: 8px !important;
+  height: 15px !important;
+  border-color: #f8c652 !important;
+}
+.lblicon{
+  margin-left: 8px !important;
+  color: white !important;
+}

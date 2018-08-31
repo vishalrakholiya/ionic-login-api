@@ -1,0 +1,52 @@
+<!-- -->
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="login-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo"></div>
+    </div>
+    <ion-item class="inputbox">
+      <ion-label class="lblicon">
+        <ion-icon name="person"></ion-icon>
+      </ion-label>
+      <ion-input [(ngModel)]='email' style="font-style: italic;" placeholder="Enter Username" clearInput></ion-input>
+    </ion-item>
+    <ion-item class="inputbox">
+      <ion-label class="lblicon">
+        <ion-icon name="ios-key"></ion-icon>
+      </ion-label>
+      <ion-input type="password" style="font-style: italic;" [(ngModel)]='password' placeholder="Enter Password" clearInput></ion-input>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-label floating>
+        <ion-icon name="person" item-start class="text-primary"></ion-icon>
+        Enter UserName
+      </ion-label>
+      <ion-input type="email" [(ngModel)]='email'></ion-input>
+    </ion-item>
+
+    <ion-item>
+
+      <ion-label>
+        <ion-icon name="ios-key" item-start class="text-primary"></ion-icon>
+        Enter Password
+      </ion-label>
+      <ion-input type="password" [(ngModel)]='password'></ion-input>
+    </ion-item> -->
+
+    <ion-item class="checkboxline">
+      <ion-label class="logged">Keep me logged in</ion-label>
+      <ion-checkbox style="margin-right:15px;margin-left: 0px;" [(ngModel)]="RememberMe"></ion-checkbox>
+      <button ion-button icon-start block color="dark" tappable (click)="login()" item-right> LOGIN >> </button>
+    </ion-item>
+    <div>
+
+      <div style="margin-right:16px;" text-right>
+        <span style="font-style: italic;" ion-text color="secondary" tappable (click)="register()"><span style="color: white;">Or</span> <strong>Register</strong></span>
+      </div>
+
+
+    </div>
+  </div>
+</ion-content>
