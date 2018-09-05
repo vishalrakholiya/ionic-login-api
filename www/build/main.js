@@ -29,7 +29,6 @@ var LoginProvider = (function () {
     LoginProvider.prototype.ValidateUser = function (id, pass) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            console.log(_this.url + "/Home/login?UserName=" + id + "&Password=" + pass);
             _this.http.get(_this.url + "/Home/login?UserName=" + id + "&Password=" + pass).subscribe(function (res) {
                 resolve(res);
             });
@@ -43,13 +42,23 @@ var LoginProvider = (function () {
             });
         });
     };
+    LoginProvider.prototype.MsgClickCount = function (msgId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.http.get(_this.url + "/Home/SetMessageCount?idMessageSerial=" + msgId).subscribe(function (res) {
+                console.log('count', res);
+                resolve(res);
+            });
+        });
+    };
     return LoginProvider;
 }());
 LoginProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
 ], LoginProvider);
 
+var _a;
 //# sourceMappingURL=login.js.map
 
 /***/ }),
@@ -989,8 +998,8 @@ TripService = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notifications_notifications__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_settings__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__search_location_search_location__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_login__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_login__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__ = __webpack_require__(197);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1008,7 +1017,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HomePage = (function () {
-    function HomePage(loginProvider, navParams, storage, nav, popoverCtrl) {
+    function HomePage(iab, loginProvider, navParams, storage, nav, popoverCtrl) {
+        this.iab = iab;
         this.loginProvider = loginProvider;
         this.navParams = navParams;
         this.storage = storage;
@@ -1023,9 +1033,12 @@ var HomePage = (function () {
             });
         });
     };
-    // choose place
-    HomePage.prototype.choosePlace = function (from) {
-        this.nav.push(__WEBPACK_IMPORTED_MODULE_5__search_location_search_location__["a" /* SearchLocationPage */], from);
+    // msg Click
+    HomePage.prototype.msgClick = function (msgId, link) {
+        this.loginProvider.MsgClickCount(msgId).then(function (data) {
+        });
+        var browser = this.iab.create(link);
+        browser.show();
     };
     // to go account page
     HomePage.prototype.goToAccount = function () {
@@ -1042,11 +1055,12 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-chat/src/pages/home/home.html"*/'<!-- -->\n<ion-header>\n  <ion-navbar color="gray">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      <strong>Messages</strong>\n    </ion-title>\n    <!-- <ion-buttons end>\n      <button ion-button tappable (click)="presentNotifications($event)">\n        <ion-icon name="notifications"></ion-icon>\n      </button>\n      <button ion-button tappable (click)="goToAccount()">\n        <ion-icon name="cog"></ion-icon>\n      </button>\n    </ion-buttons> -->\n  </ion-navbar>\n</ion-header>\n\n<!-- <ion-content padding class="animated fadeIn common-bg">\n\n  <ion-card no-margin margin-bottom class="full-width">\n    <ion-item tappable (click)="choosePlace(\'from\')" class="border-bottom">\n      <ion-icon name="search" color="primary" item-left></ion-icon>\n      <span>{{ search.name }}</span>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="md-calendar" color="primary" item-left></ion-icon>\n      <ion-datetime class="no-pl" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="search.date"></ion-datetime>\n    </ion-item>\n  </ion-card>\n\n  <button ion-button icon-start block no-margin color="primary" class="round" tappable (click)="doSearch()">\n    <ion-icon name="search"></ion-icon> Search\n  </button>\n\n</ion-content> -->\n\n<ion-content padding class="trips detail-bg">\n  <!-- <div class="trip card" *ngFor="let trip of trips" margin-bottom>\n    <div class="padding-sm chat-bg">\n      <ion-icon name="time" class="text-white"></ion-icon>\n      <span ion-text class="text-white">{{ trip.dateReceived }}</span>\n      <span class="pull-right" ion-text color="white">{{ trip.txtMessage }}</span>\n    </div>\n  </div> -->\n  \n  <div class="chatBubble" *ngFor=\'let msg of trips\'>\n    <div class="chat-bubble right">\n      <div class="message">{{msg.txtMessage}}</div>\n      <div class="message-detail">\n          <!-- <span style="font-weight:bold;">{{msg.senderName}} </span>, -->\n          <span>{{msg.dateReceived}}</span>\n      </div>\n    </div>\n    <br>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/vishal/Desktop/ionic-chat/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-chat/src/pages/home/home.html"*/'<!-- -->\n<ion-header>\n  <ion-navbar color="gray">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      <strong>Messages</strong>\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-list>\n\n    <ion-item *ngFor=\'let msg of trips\'  (click)="msgClick(msg.idMessageSerial,msg.actionLink)" >\n      <ion-avatar item-start>\n        <img src="{{msg.siteIcon}}">\n      </ion-avatar>\n      <img *ngIf="msg.idMessageType == 1" style="width:100%;height:120px;" src="{{msg.headerimge}}">\n      <h2 class="text-black">{{msg.Username}}<span class="msgAge" >{{msg.Age}}</span></h2>\n      <p>{{msg.txtMessage}}</p>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n      </ion-avatar>\n      <h2 class="text-black">Finn</h2>\n      <p>I\'ve had a pretty messed up day. If we just...</p>\n    </ion-item> -->\n  </ion-list>\n\n  <!-- <div class="chatBubble" *ngFor=\'let msg of trips\'>\n    <div class="chat-bubble right">\n      <div class="message">{{msg.txtMessage}}</div>\n      <div class="message-detail">\n          <span>{{msg.dateReceived}}</span>\n      </div>\n    </div>\n    <br>\n  </div> -->\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-chat/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* PopoverController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__["a" /* InAppBrowser */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__["a" /* InAppBrowser */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__services_login__["a" /* LoginProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_login__["a" /* LoginProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* PopoverController */]) === "function" && _f || Object])
 ], HomePage);
 
+var _a, _b, _c, _d, _e, _f;
 //
 //# sourceMappingURL=home.js.map
 

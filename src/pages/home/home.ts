@@ -5,6 +5,7 @@ import { NotificationsPage } from "../notifications/notifications";
 import { SettingsPage } from "../settings/settings";
 import { SearchLocationPage } from "../search-location/search-location";
 import { LoginProvider } from "../../services/login";
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { LoginProvider } from "../../services/login";
 
 export class HomePage {
   public trips: any;
-  constructor(public loginProvider: LoginProvider, public navParams: NavParams, private storage: Storage, public nav: NavController, public popoverCtrl: PopoverController) {
+  constructor(private iab: InAppBrowser,public loginProvider: LoginProvider, public navParams: NavParams, private storage: Storage, public nav: NavController, public popoverCtrl: PopoverController) {
   }
 
   ionViewWillEnter() {
@@ -25,9 +26,13 @@ export class HomePage {
     })
   }
 
-  // choose place
-  choosePlace(from) {
-    this.nav.push(SearchLocationPage, from);
+  // msg Click
+  msgClick(msgId,link) {
+    this.loginProvider.MsgClickCount(msgId).then((data) => {
+    });
+    const browser = this.iab.create(link);
+    browser.show()
+    
   }
 
   // to go account page
