@@ -22,6 +22,9 @@ export class HomePage {
     this.storage.get('LoggedUserId').then((userid) => {
       this.loginProvider.GetAllMessages(userid).then((data) => {
         this.trips = data;
+
+        this.loginProvider.SetMsgRecivedDate(userid).then((res) => { console.log('recievdate',res);
+         }); 
       });
     })
   }
