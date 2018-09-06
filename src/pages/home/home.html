@@ -7,53 +7,37 @@
     <ion-title>
       <strong>Messages</strong>
     </ion-title>
-    <!-- <ion-buttons end>
-      <button ion-button tappable (click)="presentNotifications($event)">
-        <ion-icon name="notifications"></ion-icon>
-      </button>
-      <button ion-button tappable (click)="goToAccount()">
-        <ion-icon name="cog"></ion-icon>
-      </button>
-    </ion-buttons> -->
   </ion-navbar>
 </ion-header>
 
-<!-- <ion-content padding class="animated fadeIn common-bg">
 
-  <ion-card no-margin margin-bottom class="full-width">
-    <ion-item tappable (click)="choosePlace('from')" class="border-bottom">
-      <ion-icon name="search" color="primary" item-left></ion-icon>
-      <span>{{ search.name }}</span>
+<ion-content>
+  <ion-list>
+
+    <ion-item *ngFor='let msg of trips'  (click)="msgClick(msg.idMessageSerial,msg.actionLink)" >
+      <ion-avatar item-start>
+        <img src="{{msg.siteIcon}}">
+      </ion-avatar>
+      <img *ngIf="msg.idMessageType == 1" style="width:100%;height:120px;" src="{{msg.headerimge}}">
+      <h2 class="text-black">{{msg.Username}}@{{msg.actionLink}}<span class="msgAge" >{{msg.Age}}</span></h2>
+      <p>{{msg.txtMessage}}</p>
     </ion-item>
-    <ion-item>
-      <ion-icon name="md-calendar" color="primary" item-left></ion-icon>
-      <ion-datetime class="no-pl" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="search.date"></ion-datetime>
-    </ion-item>
-  </ion-card>
+    <!-- <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/img/ionic3-ico.png">
+      </ion-avatar>
+      <h2 class="text-black">Finn</h2>
+      <p>I've had a pretty messed up day. If we just...</p>
+    </ion-item> -->
+  </ion-list>
 
-  <button ion-button icon-start block no-margin color="primary" class="round" tappable (click)="doSearch()">
-    <ion-icon name="search"></ion-icon> Search
-  </button>
-
-</ion-content> -->
-
-<ion-content padding class="trips detail-bg">
-  <!-- <div class="trip card" *ngFor="let trip of trips" margin-bottom>
-    <div class="padding-sm chat-bg">
-      <ion-icon name="time" class="text-white"></ion-icon>
-      <span ion-text class="text-white">{{ trip.dateReceived }}</span>
-      <span class="pull-right" ion-text color="white">{{ trip.txtMessage }}</span>
-    </div>
-  </div> -->
-  
-  <div class="chatBubble" *ngFor='let msg of trips'>
+  <!-- <div class="chatBubble" *ngFor='let msg of trips'>
     <div class="chat-bubble right">
       <div class="message">{{msg.txtMessage}}</div>
       <div class="message-detail">
-          <!-- <span style="font-weight:bold;">{{msg.senderName}} </span>, -->
           <span>{{msg.dateReceived}}</span>
       </div>
     </div>
     <br>
-  </div>
+  </div> -->
 </ion-content>
