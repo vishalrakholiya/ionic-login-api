@@ -56,9 +56,10 @@ var LoginProvider = (function () {
 }());
 LoginProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
 ], LoginProvider);
 
+var _a;
 //# sourceMappingURL=login.js.map
 
 /***/ }),
@@ -998,8 +999,8 @@ TripService = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notifications_notifications__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_settings__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_login__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_login__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__ = __webpack_require__(197);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1055,12 +1056,22 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+<<<<<<< HEAD
         selector: 'page-home',template:/*ion-inline-start:"D:\WORK\Alpesh\ionic-login-api\src\pages\home\home.html"*/'<!-- -->\n\n<ion-header>\n\n  <ion-navbar color="gray">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      <strong>Messages</strong>\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor=\'let msg of trips\'  (click)="msgClick(msg.idMessageSerial,msg.actionLink)" >\n\n      <ion-avatar item-start>\n\n        <img src="{{msg.siteIcon}}">\n\n      </ion-avatar>\n\n      <img *ngIf="msg.idMessageType == 1" style="width:100%;height:120px;" src="{{msg.headerimge}}">\n\n      <h2 class="text-black">{{msg.Username}}@{{msg.actionLink}}<span class="msgAge" >{{msg.Age}}</span></h2>\n\n      <p>{{msg.txtMessage}}</p>\n\n    </ion-item>\n\n    <!-- <ion-item>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n      </ion-avatar>\n\n      <h2 class="text-black">Finn</h2>\n\n      <p>I\'ve had a pretty messed up day. If we just...</p>\n\n    </ion-item> -->\n\n  </ion-list>\n\n\n\n  <!-- <div class="chatBubble" *ngFor=\'let msg of trips\'>\n\n    <div class="chat-bubble right">\n\n      <div class="message">{{msg.txtMessage}}</div>\n\n      <div class="message-detail">\n\n          <span>{{msg.dateReceived}}</span>\n\n      </div>\n\n    </div>\n\n    <br>\n\n  </div> -->\n\n</ion-content>'/*ion-inline-end:"D:\WORK\Alpesh\ionic-login-api\src\pages\home\home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__["a" /* InAppBrowser */], __WEBPACK_IMPORTED_MODULE_5__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* PopoverController */]])
 ], HomePage);
 
 // 
+=======
+        selector: 'page-home',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-chat/src/pages/home/home.html"*/'<!-- -->\n<ion-header>\n  <ion-navbar color="gray">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      <strong>Messages</strong>\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-list>\n\n    <ion-item *ngFor=\'let msg of trips\'  (click)="msgClick(msg.idMessageSerial,msg.actionLink)" >\n      <ion-avatar item-start>\n        <img src="{{msg.siteIcon}}">\n      </ion-avatar>\n      <img *ngIf="msg.idMessageType == 1" style="width:100%;height:120px;" src="{{msg.headerimge}}">\n      <h2 class="text-black">{{msg.Username}}<span class="msgAge" >{{msg.Age}}</span></h2>\n      <p>{{msg.txtMessage}}</p>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n      </ion-avatar>\n      <h2 class="text-black">Finn</h2>\n      <p>I\'ve had a pretty messed up day. If we just...</p>\n    </ion-item> -->\n  </ion-list>\n\n  <!-- <div class="chatBubble" *ngFor=\'let msg of trips\'>\n    <div class="chat-bubble right">\n      <div class="message">{{msg.txtMessage}}</div>\n      <div class="message-detail">\n          <span>{{msg.dateReceived}}</span>\n      </div>\n    </div>\n    <br>\n  </div> -->\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-chat/src/pages/home/home.html"*/
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__["a" /* InAppBrowser */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__["a" /* InAppBrowser */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__services_login__["a" /* LoginProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_login__["a" /* LoginProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* PopoverController */]) === "function" && _f || Object])
+], HomePage);
+
+var _a, _b, _c, _d, _e, _f;
+//
+>>>>>>> 1a3443a059ed0f96f21da44a6bd71a98743a0cfd
 //# sourceMappingURL=home.js.map
 
 /***/ })

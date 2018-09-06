@@ -28,9 +28,7 @@ export class LoginProvider {
     })
   }
   MsgClickCount(msgId){
-    return new Promise((resolve,reject)=>{     
-     
-       
+    return new Promise((resolve,reject)=>{      
       this.http.get(`${this.url}/Home/SetMessageCount?idMessageSerial=${msgId}`).subscribe(res => {
         console.log('count',res);
         resolve(res);
