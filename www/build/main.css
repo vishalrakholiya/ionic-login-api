@@ -27077,6 +27077,11 @@ page-home .msgAge,
   color: gray;
 }
 
+page-home .txtCenter,
+.home .txtCenter {
+  text-align: center;
+}
+
 page-login,
 .login .scroll-content {
   padding-left: 35px !important;

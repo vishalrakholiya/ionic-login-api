@@ -14,13 +14,18 @@
 <ion-content>
   <ion-list>
 
-    <ion-item *ngFor='let msg of trips'  (click)="msgClick(msg.idMessageSerial,msg.actionLink)" >
-      <ion-avatar item-start>
+    <ion-item *ngFor='let msg of trips' (click)="msgClick(msg.idMessageSerial,msg.actionLink)">
+      <div *ngIf="msg.idMessageType == 2">
+        <p class="txtCenter">{{msg.txtMessage}}</p>
+        <img style="width:100%;height:120px;" src="{{msg.headerimge}}">
+        <p class="txtCenter">{{msg.txtMessage}}</p>
+      </div>
+      <ion-avatar item-start *ngIf="msg.idMessageType != 2">
         <img src="{{msg.siteIcon}}">
       </ion-avatar>
       <img *ngIf="msg.idMessageType == 1" style="width:100%;height:120px;" src="{{msg.headerimge}}">
-      <h2 class="text-black">{{msg.Username}}@{{msg.actionLink}}<span class="msgAge" >{{msg.Age}}</span></h2>
-      <p>{{msg.txtMessage}}</p>
+      <h2 *ngIf="msg.idMessageType != 2" class="text-black">{{msg.Username}}@frontier<span class="msgAge">{{msg.Age}}</span></h2>
+      <p *ngIf="msg.idMessageType != 2">{{msg.txtMessage}}</p>
     </ion-item>
     <!-- <ion-item>
       <ion-avatar item-start>
