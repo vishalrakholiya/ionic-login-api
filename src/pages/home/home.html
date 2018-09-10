@@ -16,7 +16,7 @@
 
     <ion-item *ngFor='let msg of trips' (click)="msgClick(msg.idMessageSerial,msg.actionLink)">
       <div *ngIf="msg.idMessageType == 2">
-        <p class="txtCenter">{{msg.txtMessage}}</p>
+        <p class="txtCenter">{{msg.DisplayName}}</p>
         <img style="width:100%;height:120px;" src="{{msg.headerimge}}">
         <p class="txtCenter">{{msg.txtMessage}}</p>
       </div>
