@@ -40,4 +40,11 @@ export class LoginProvider {
       });
     });
   }
+  GetDynamicAppMenu(){
+    return new Promise((resolve,reject)=>{      
+      this.http.get(`${this.url}/Home/GetAppMenu`).subscribe(res => {
+        resolve(res);
+      });
+    });
+  }
 }

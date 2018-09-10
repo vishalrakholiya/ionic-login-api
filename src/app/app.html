@@ -20,6 +20,10 @@
         <ion-icon item-left [name]="menuItem.icon" color="gray"></ion-icon>
         <span ion-text color="gray">{{menuItem.title}}</span>
       </button>
+      <button ion-item menuClose class="text-1x" *ngFor="let DmenuItem of DynamicappMenuItems" (click)="openLink(DmenuItem.urllink)">
+        <ion-icon item-left [name]="DmenuItem.icon" color="gray"></ion-icon>
+        <span ion-text color="gray">{{DmenuItem.title}}</span>
+      </button>
     </ion-list>
     <ion-list class="user-list">
       <button ion-item menuClose class="text-1x" (click)="logout()">
