@@ -63,7 +63,7 @@ export class MyApp {
         if (reso) {
           this.result = reso;
           this.result.forEach(function(element){
-            dynamicList.push({ title: element.resourceName, urllink: element.resourceValue, icon: 'home' })//element.resourceicon
+            dynamicList.push({ title: element.resourceName, urllink: element.resourceValue, icon: element.resourceicon })//element.resourceicon
           });
           this.DynamicappMenuItems = dynamicList;
         }

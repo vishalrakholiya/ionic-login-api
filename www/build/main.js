@@ -709,7 +709,7 @@ var MyApp = (function () {
                 if (reso) {
                     _this.result = reso;
                     _this.result.forEach(function (element) {
-                        dynamicList.push({ title: element.resourceName, urllink: element.resourceValue, icon: 'home' }); //element.resourceicon
+                        dynamicList.push({ title: element.resourceName, urllink: element.resourceValue, icon: element.resourceicon }); //element.resourceicon
                     });
                     _this.DynamicappMenuItems = dynamicList;
                 }
