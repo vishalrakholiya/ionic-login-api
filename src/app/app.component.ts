@@ -30,7 +30,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = '';
-
+  result:any;
   appMenuItems: Array<MenuItem>;
   DynamicappMenuItems: Array<DynamicMenuItem>;
 
@@ -44,15 +44,7 @@ export class MyApp {
     private iab: InAppBrowser
   ) {
     this.initializeApp();
-    this.loginProvider.GetDynamicAppMenu().then((res) => {
-      let dynamicList = [];
-      if (res) {
-        res.forEach(function(element){
-          dynamicList.push({ title: element.resourceName, urllink: element.resourceValue, icon: 'home' })//element.resourceicon
-        });
-        this.DynamicappMenuItems = dynamicList;
-      }
-    });
+    
     this.appMenuItems = [
       { title: 'Home', component: HomePage, icon: 'home' },
       // {title: 'Local Weather', component: LocalWeatherPage, icon: 'partly-sunny'}
@@ -66,7 +58,16 @@ export class MyApp {
       //*** Control Splash Screen
       // this.splashScreen.show();
       // this.splashScreen.hide();
-
+      this.loginProvider.GetDynamicAppMenu().then((reso) => {
+        let dynamicList = [];
+        if (reso) {
+          this.result = reso;
+          this.result.forEach(function(element){
+            dynamicList.push({ title: element.resourceName, urllink: element.resourceValue, icon: 'home' })//element.resourceicon
+          });
+          this.DynamicappMenuItems = dynamicList;
+        }
+      });
       this.storage.get('IsRemember').then((data) => {
         console.log(data);
         if (data) {
