@@ -11,7 +11,11 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content #content>
+  <ion-refresher *ngIf="pageNo < TotalPage" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list>
 
     <ion-item *ngFor='let msg of trips' (click)="msgClick(msg.idMessageSerial,msg.actionLink)">

@@ -19,9 +19,9 @@ export class LoginProvider {
       });
     });
   }
-  GetAllMessages(userid){
+  GetAllMessages(userid,pageNo){
     return new Promise((resolve,reject)=>{
-      this.http.get(`${this.url}/Home/GetMessage?UserId=${userid}`).subscribe(res => {
+      this.http.get(`${this.url}/Home/GetMessage?UserId=${userid}&pageNo=${pageNo}`).subscribe(res => {
         resolve(res);
       });
     })
