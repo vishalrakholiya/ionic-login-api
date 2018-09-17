@@ -21,7 +21,7 @@ import {CheckoutTripPage} from "../pages/checkout-trip/checkout-trip";
 import {HomePage} from "../pages/home/home";
 import {LoginPage} from "../pages/login/login";
 import {NotificationsPage} from "../pages/notifications/notifications";
-// import {RegisterPage} from "../pages/register/register";
+import {WalletPage} from "../pages/wallet/wallet";
 import {SearchLocationPage} from "../pages/search-location/search-location";
 import {TripDetailPage} from "../pages/trip-detail/trip-detail";
 import {TripsPage} from "../pages/trips/trips";
@@ -41,13 +41,13 @@ import {TripsPage} from "../pages/trips/trips";
     HomePage,
     LoginPage,
     NotificationsPage,
-    // RegisterPage,
+    WalletPage,
     SearchLocationPage,
     TripDetailPage,
     TripsPage
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
@@ -67,7 +67,7 @@ import {TripsPage} from "../pages/trips/trips";
     HomePage,
     LoginPage,
     NotificationsPage,
-    // RegisterPage,
+    WalletPage,
     SearchLocationPage,
     TripDetailPage,
     TripsPage

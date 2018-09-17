@@ -7,6 +7,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { Storage } from '@ionic/storage';
 import { HomePage } from "../pages/home/home";
 import { LoginPage } from "../pages/login/login";
+import { WalletPage } from "../pages/wallet/wallet";
 import { LoginProvider } from "../services/login";
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -30,7 +31,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = '';
-  result:any;
+  result: any;
   appMenuItems: Array<MenuItem>;
   DynamicappMenuItems: Array<DynamicMenuItem>;
 
@@ -44,11 +45,12 @@ export class MyApp {
     private iab: InAppBrowser
   ) {
     this.initializeApp();
-    
+
     this.appMenuItems = [
       { title: 'Home', component: HomePage, icon: 'home' },
-      // {title: 'Local Weather', component: LocalWeatherPage, icon: 'partly-sunny'}
+      { title: 'Wallet', component: WalletPage, icon: 'logo-usd' }
     ];
+    
   }
 
   initializeApp() {
@@ -62,7 +64,7 @@ export class MyApp {
         let dynamicList = [];
         if (reso) {
           this.result = reso;
-          this.result.forEach(function(element){
+          this.result.forEach(function (element) {
             dynamicList.push({ title: element.resourceName, urllink: element.resourceValue, icon: element.resourceicon })//element.resourceicon
           });
           this.DynamicappMenuItems = dynamicList;
@@ -93,7 +95,7 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
-  openLink(link){
+  openLink(link) {
     const browser = this.iab.create(link);
     browser.show();
   }
