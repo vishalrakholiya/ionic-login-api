@@ -1,8 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { NavController, NavParams, PopoverController } from "ionic-angular";
 import { Storage } from '@ionic/storage';
-import { NotificationsPage } from "../notifications/notifications";
-import { SettingsPage } from "../settings/settings";
 import { LoginProvider } from "../../services/login";
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Content } from 'ionic-angular';
@@ -63,19 +61,4 @@ export class HomePage {
 
   }
 
-  // to go account page
-  goToAccount() {
-    this.nav.push(SettingsPage);
-  }
-
-  presentNotifications(myEvent) {
-    console.log(myEvent);
-    let popover = this.popoverCtrl.create(NotificationsPage);
-    popover.present({
-      ev: myEvent
-    });
-  }
-
 }
-
-//

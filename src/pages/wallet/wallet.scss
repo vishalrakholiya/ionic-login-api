@@ -1,3 +1,15 @@
 page-wallet {
-
+  .tab-buttons-container{
+    background: #7a828c
+  }
+  .button-md-primary {
+    color: #fff;
+    background-color: #ffffff;
+  }
+  .content-md{
+    color:white !important;
+  }
+  .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement='bottom'] > .tabbar::before{
+        background-image: none;
+  }
 }

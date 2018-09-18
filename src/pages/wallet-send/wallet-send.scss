@@ -1,0 +1,28 @@
+page-wallet-send,
+.wallet-send {
+  .balance-bg{
+    background: #f3f3f3;
+  }
+	.ftbcoinlbl{
+    background: orange;
+    color: white !important; 
+    padding: 3px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    font-size: 25px !important;
+    text-align: center;
+    transform: rotate(18deg);
+  }
+  .payto{
+    color: gray;
+    font-weight: 500;
+    margin-left: 16px;
+    margin-bottom: 0px;
+  }
+  .sendbtn{
+    float: right;
+    margin: 16px;
+    background: #858d97;
+  }
+}

@@ -5,27 +5,19 @@
 
     </button>
     <ion-title>
-      <strong>FrontierCoin</strong>
+      <strong>FrontierCoin<ion-icon style="float: right;" name="md-more"></ion-icon><ion-icon style="float: right;padding-right: 15px;" name="md-barcode"></ion-icon></strong>
     </ion-title>
-    <ion-icon style="float: right;" name="md-barcode"></ion-icon>
-    <ion-icon style="float: right;" name="md-more"></ion-icon>
+    <!-- 
+     -->
 
   </ion-navbar>
-  <ion-toolbar color="gray">
-    <ion-row class="filters">
-      <ion-col no-padding>
-        <ion-slides (ionSlideDidChange)="slideChanged()" slidesPerView="3">
-          <ion-slide (click)="filterData(category.id)" *ngFor="let category of [1,2,3]">
-            <p [class.selected]="selectedCategory?.id === category.id">Tests</p>
-          </ion-slide>
-        </ion-slides>
-      </ion-col>
-    </ion-row>
-
-  </ion-toolbar>
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <super-tabs style="height: 100%">
+    <super-tab [root]="page1" title="receive"></super-tab>
+    <super-tab [root]="page2" title="balance"></super-tab>
+    <super-tab [root]="page3" title="send"></super-tab>
+  </super-tabs>
 </ion-content>
