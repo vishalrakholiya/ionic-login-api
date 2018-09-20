@@ -47,4 +47,18 @@ export class LoginProvider {
       });
     });
   }
+  GetWallet(userid){
+    return new Promise((resolve,reject)=>{
+      this.http.get(`${this.url}/Home/GetWallet?UserId=${userid}`).subscribe(res => {
+        resolve(res);
+      });
+    })
+  }
+  GetTicket(userid){
+    return new Promise((resolve,reject)=>{
+      this.http.get(`${this.url}/Home/GetTicket?UserId=${userid}`).subscribe(res => {
+        resolve(res);
+      });
+    })
+  }
 }

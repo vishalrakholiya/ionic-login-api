@@ -1,27 +1,27 @@
 <ion-content class="balance-bg">
   <ion-item class="txtCenter">
-    <h4 class='black usd'>5.37 USD</h4>
-    <h1 class='black btcoin'>0.0247</h1>
+    <h4 class='black usd'>{{walletExchangeValue}} USD</h4>
+    <h1 class='black btcoin'>{{walletTokenCount}}</h1>
     <h3 class='black ftb'>FTB</h3>
   </ion-item>
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor='let tran of transactionList'>
       <ion-avatar item-start>
         <img src="assets/img/ionic3-ico.png">
         <ion-icon class="battery" name="ios-battery-dead"></ion-icon>
       </ion-avatar>
-      <p>sent to</p>
-      <h2 class="text-black cardno">gdsfg gf2g gfg1 dg12 g21g er12 ert1 yytr</h2>
-      <h2 class="amount">-0.00130146</h2>
+      <p>{{tran.TicketTypeName}}</p>
+      <h2 class="text-black cardno">{{tran.Memo}}</h2>
+      <h2 class="amountfull">{{tran.qtyDemand}}</h2>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
       <ion-avatar item-start>
         <img src="assets/img/ionic3-ico.png">
         <ion-icon class="battery" name="ios-battery-full"></ion-icon>
       </ion-avatar>
       <p>sent to</p>
       <h2 class="text-black cardno">gdsfg gf2g gfg1 dg12 g21g er12 ert1 yytr</h2>
-      <h2 class="amountfull">-0.0017</h2>
+      <h2 class="amount">-0.0017</h2>
     </ion-item>
     <ion-item>
       <ion-avatar item-start>
@@ -30,6 +30,6 @@
       <p>received with</p>
       <h2 class="text-black cardno">My Bitcoin address</h2>
       <h2 class="amountget">+0.0029</h2>
-    </ion-item>
+    </ion-item> -->
   </ion-list>
 </ion-content>

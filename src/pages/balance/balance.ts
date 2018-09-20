@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { NavController, NavParams } from 'ionic-angular';
+import { LoginProvider } from "../../services/login";
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -7,11 +9,31 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'balance.html'
 })
 export class BalancePage {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public walletTokenCount: any;
+  public walletExchangeValue: any;
+  public transactionList: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, private storage: Storage) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WalletPage');
+    this.storage.get('LoggedUserId').then((userid) => {
+      this.loginProvider.GetWallet(userid).then((data) => {
+        if (data[0]) {
+          this.walletTokenCount = data[0].WalletTokenCount;
+          this.walletExchangeValue = data[0].WalletExchangeValue;
+        } else {
+          this.walletTokenCount = 1111;
+          this.walletExchangeValue = 1111;
+        }
+      });
+      this.loginProvider.GetTicket(userid).then((data) => {
+        if (data) {
+          this.transactionList = data;
+          console.log(this.transactionList);
+          
+        }
+      });
+    });
   }
 
 }
