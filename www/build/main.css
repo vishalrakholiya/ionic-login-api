@@ -27519,18 +27519,10 @@ page-wallet-send .balance-bg,
   background: #f3f3f3;
 }
 
-page-wallet-send .ftbcoinlbl,
-.wallet-send .ftbcoinlbl {
-  background: orange;
-  color: white !important;
-  padding: 3px;
-  height: 35px;
-  width: 35px;
-  border-radius: 50%;
-  font-size: 25px !important;
-  text-align: center;
-  -webkit-transform: rotate(18deg);
-  transform: rotate(18deg);
+page-wallet-send .ftbcoin,
+.wallet-send .ftbcoin {
+  height: 45px;
+  width: 45px;
 }
 
 page-wallet-send .payto,
