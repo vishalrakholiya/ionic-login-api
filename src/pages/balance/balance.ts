@@ -17,22 +17,24 @@ export class BalancePage {
 
   ionViewDidLoad() {
     this.storage.get('LoggedUserId').then((userid) => {
-      this.loginProvider.GetWallet(userid).then((data) => {
+      this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
+        console.log(data);
         if (data[0]) {
           this.walletTokenCount = data[0].WalletTokenCount;
           this.walletExchangeValue = data[0].WalletExchangeValue;
-        } else {
-          this.walletTokenCount = 1111;
-          this.walletExchangeValue = 1111;
-        }
-      });
-      this.loginProvider.GetTicket(userid).then((data) => {
-        if (data) {
           this.transactionList = data;
-          console.log(this.transactionList);
-          
+        } else {
+          this.walletTokenCount = 0;
+          this.walletExchangeValue = 0;
         }
       });
+      // this.loginProvider.GetTicket(userid).then((data) => {
+      //   if (data) {
+      //     this.transactionList = data;
+      //     console.log(this.transactionList);
+          
+      //   }
+      // });
     });
   }
 

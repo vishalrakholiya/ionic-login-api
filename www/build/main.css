@@ -27346,7 +27346,7 @@ page-balance .amount,
 
 page-balance .amountfull,
 .balance .amountfull {
-  color: orange;
+  color: red;
   font-weight: bold;
 }
 
@@ -27359,7 +27359,7 @@ page-balance .battery,
 
 page-balance .amountget,
 .balance .amountget {
-  color: darkturquoise;
+  color: green;
   font-weight: bold;
 }
 

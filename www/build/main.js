@@ -213,29 +213,31 @@ var BalancePage = (function () {
     BalancePage.prototype.ionViewDidLoad = function () {
         var _this = this;
         this.storage.get('LoggedUserId').then(function (userid) {
-            _this.loginProvider.GetWallet(userid).then(function (data) {
+            _this.loginProvider.GetWalletAndTransactions(userid).then(function (data) {
+                console.log(data);
                 if (data[0]) {
                     _this.walletTokenCount = data[0].WalletTokenCount;
                     _this.walletExchangeValue = data[0].WalletExchangeValue;
+                    _this.transactionList = data;
                 }
                 else {
-                    _this.walletTokenCount = 1111;
-                    _this.walletExchangeValue = 1111;
+                    _this.walletTokenCount = 0;
+                    _this.walletExchangeValue = 0;
                 }
             });
-            _this.loginProvider.GetTicket(userid).then(function (data) {
-                if (data) {
-                    _this.transactionList = data;
-                    console.log(_this.transactionList);
-                }
-            });
+            // this.loginProvider.GetTicket(userid).then((data) => {
+            //   if (data) {
+            //     this.transactionList = data;
+            //     console.log(this.transactionList);
+            //   }
+            // });
         });
     };
     return BalancePage;
 }());
 BalancePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-balance',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/balance/balance.html"*/'<ion-content class="balance-bg">\n  <ion-item class="txtCenter">\n    <h4 class=\'black usd\'>{{walletExchangeValue}} USD</h4>\n    <h1 class=\'black btcoin\'>{{walletTokenCount}}</h1>\n    <h3 class=\'black ftb\'>FTB</h3>\n  </ion-item>\n  <ion-list>\n    <ion-item *ngFor=\'let tran of transactionList\'>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon class="battery" name="ios-battery-dead"></ion-icon>\n      </ion-avatar>\n      <p>{{tran.TicketTypeName}}</p>\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n      <h2 class="amountfull">{{tran.qtyDemand}}</h2>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>sent to</p>\n      <h2 class="text-black cardno">gdsfg gf2g gfg1 dg12 g21g er12 ert1 yytr</h2>\n      <h2 class="amount">-0.0017</h2>\n    </ion-item>\n    <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n      </ion-avatar>\n      <p>received with</p>\n      <h2 class="text-black cardno">My Bitcoin address</h2>\n      <h2 class="amountget">+0.0029</h2>\n    </ion-item> -->\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/balance/balance.html"*/
+        selector: 'page-balance',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/balance/balance.html"*/'<ion-content class="balance-bg">\n  <ion-item class="txtCenter">\n    <h4 class=\'black usd\'>{{walletExchangeValue}} USD</h4>\n    <h1 class=\'black btcoin\'>{{walletTokenCount}}</h1>\n    <h3 class=\'black ftb\'>FTB</h3>\n  </ion-item>\n  <ion-list>\n    <ion-item *ngFor=\'let tran of transactionList\'>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>{{tran.TicketTypeName}}</p>\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>sent to</p>\n      <h2 class="text-black cardno">gdsfg gf2g gfg1 dg12 g21g er12 ert1 yytr</h2>\n      <h2 class="amount">-0.0017</h2>\n    </ion-item>\n    <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n      </ion-avatar>\n      <p>received with</p>\n      <h2 class="text-black cardno">My Bitcoin address</h2>\n      <h2 class="amountget">+0.0029</h2>\n    </ion-item> -->\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/balance/balance.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
 ], BalancePage);
@@ -751,18 +753,18 @@ var LoginProvider = (function () {
             });
         });
     };
-    LoginProvider.prototype.GetWallet = function (userid) {
+    LoginProvider.prototype.GetWalletAndTransactions = function (userid) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            _this.http.get(_this.url + "/Home/GetWallet?UserId=" + userid).subscribe(function (res) {
+            _this.http.get(_this.url + "/Home/GetWalletTicket?UserId=" + userid).subscribe(function (res) {
                 resolve(res);
             });
         });
     };
-    LoginProvider.prototype.GetTicket = function (userid) {
+    LoginProvider.prototype.SendTokens = function (senderid, receiverId, amt, sn, rn) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            _this.http.get(_this.url + "/Home/GetTicket?UserId=" + userid).subscribe(function (res) {
+            _this.http.get(_this.url + "/Home/SendTokens?senderId=" + senderid + "&receiverId=" + receiverId + "&amount=" + amt + "&sentfrom=" + sn + "&sentto=" + rn).subscribe(function (res) {
                 resolve(res);
             });
         });
