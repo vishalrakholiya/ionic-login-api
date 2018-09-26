@@ -54,6 +54,13 @@ export class LoginProvider {
       });
     })
   }
+  GetReceiverId(name){
+    return new Promise((resolve,reject)=>{
+      this.http.get(`${this.url}/Home/GetReceiverId?ReceiverName=${name}`).subscribe(res => {
+        resolve(res);
+      });
+    })
+  }
   SendTokens(senderid,receiverId,amt,sn,rn){
     return new Promise((resolve,reject)=>{
       this.http.get(`${this.url}/Home/SendTokens?senderId=${senderid}&receiverId=${receiverId}&amount=${amt}&sentfrom=${sn}&sentto=${rn}`).subscribe(res => {

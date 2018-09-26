@@ -34,6 +34,7 @@ export class LoginPage {
           this.storage.set('IsRemember', true);
         }
         this.storage.set('LoggedUserId', res[0].UserId);
+        this.storage.set('LoggedUserName',this.email);
         this.nav.setRoot(HomePage);
       } else {
         let toast = this.toastCtrl.create({
