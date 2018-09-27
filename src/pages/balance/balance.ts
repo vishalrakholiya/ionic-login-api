@@ -16,6 +16,25 @@ export class BalancePage {
   }
 
   ionViewDidLoad() {
+    this.getTranList();
+  }
+  doRefresh(refresher) {
+    this.storage.get('LoggedUserId').then((userid) => {
+      this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
+        if (data[0]) {
+          this.walletTokenCount = data[0].WalletTokenCount;
+          this.walletExchangeValue = data[0].WalletExchangeValue;
+          this.transactionList = data;
+        } else {
+          this.walletTokenCount = 0;
+          this.walletExchangeValue = 0;
+        }
+        refresher.complete();
+      });
+    });
+  }
+
+  getTranList() {
     this.storage.get('LoggedUserId').then((userid) => {
       this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
         console.log(data);
@@ -26,15 +45,9 @@ export class BalancePage {
         } else {
           this.walletTokenCount = 0;
           this.walletExchangeValue = 0;
+
         }
       });
-      // this.loginProvider.GetTicket(userid).then((data) => {
-      //   if (data) {
-      //     this.transactionList = data;
-      //     console.log(this.transactionList);
-          
-      //   }
-      // });
     });
   }
 

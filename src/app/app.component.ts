@@ -59,7 +59,7 @@ export class MyApp {
 
       //*** Control Splash Screen
       // this.splashScreen.show();
-      // this.splashScreen.hide();
+       this.splashScreen.hide();
       this.loginProvider.GetDynamicAppMenu().then((reso) => {
         let dynamicList = [];
         if (reso) {

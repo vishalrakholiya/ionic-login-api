@@ -211,6 +211,26 @@ var BalancePage = (function () {
         this.storage = storage;
     }
     BalancePage.prototype.ionViewDidLoad = function () {
+        this.getTranList();
+    };
+    BalancePage.prototype.doRefresh = function (refresher) {
+        var _this = this;
+        this.storage.get('LoggedUserId').then(function (userid) {
+            _this.loginProvider.GetWalletAndTransactions(userid).then(function (data) {
+                if (data[0]) {
+                    _this.walletTokenCount = data[0].WalletTokenCount;
+                    _this.walletExchangeValue = data[0].WalletExchangeValue;
+                    _this.transactionList = data;
+                }
+                else {
+                    _this.walletTokenCount = 0;
+                    _this.walletExchangeValue = 0;
+                }
+                refresher.complete();
+            });
+        });
+    };
+    BalancePage.prototype.getTranList = function () {
         var _this = this;
         this.storage.get('LoggedUserId').then(function (userid) {
             _this.loginProvider.GetWalletAndTransactions(userid).then(function (data) {
@@ -225,19 +245,13 @@ var BalancePage = (function () {
                     _this.walletExchangeValue = 0;
                 }
             });
-            // this.loginProvider.GetTicket(userid).then((data) => {
-            //   if (data) {
-            //     this.transactionList = data;
-            //     console.log(this.transactionList);
-            //   }
-            // });
         });
     };
     return BalancePage;
 }());
 BalancePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-balance',template:/*ion-inline-start:"D:\WORK\Alpesh\ionic-login-api\src\pages\balance\balance.html"*/'<ion-content class="balance-bg">\n\n  <ion-item class="txtCenter">\n\n    <h4 class=\'black usd\'>{{walletExchangeValue}} USD</h4>\n\n    <h1 class=\'black btcoin\'>{{walletTokenCount}}</h1>\n\n    <h3 class=\'black ftb\'>FTB</h3>\n\n  </ion-item>\n\n  <ion-list>\n\n    <ion-item *ngFor=\'let tran of transactionList\'>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n\n      </ion-avatar>\n\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n\n    </ion-item>\n\n    <!-- <ion-item>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n        <ion-icon class="battery" name="ios-battery-full"></ion-icon>\n\n      </ion-avatar>\n\n      <p>sent to</p>\n\n      <h2 class="text-black cardno">gdsfg gf2g gfg1 dg12 g21g er12 ert1 yytr</h2>\n\n      <h2 class="amount">-0.0017</h2>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n      </ion-avatar>\n\n      <p>received with</p>\n\n      <h2 class="text-black cardno">My Bitcoin address</h2>\n\n      <h2 class="amountget">+0.0029</h2>\n\n    </ion-item> -->\n\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"D:\WORK\Alpesh\ionic-login-api\src\pages\balance\balance.html"*/
+        selector: 'page-balance',template:/*ion-inline-start:"D:\WORK\Alpesh\ionic-login-api\src\pages\balance\balance.html"*/'<ion-content class="balance-bg">\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"\n\n      refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n  <ion-item class="txtCenter">\n\n    <h4 class=\'black usd\'>{{walletExchangeValue}} USD</h4>\n\n    <h1 class=\'black btcoin\'>{{walletTokenCount}}</h1>\n\n    <h3 class=\'black ftb\'>FTB</h3>\n\n  </ion-item>\n\n  <ion-list>\n\n    <ion-item *ngFor=\'let tran of transactionList\'>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n\n      </ion-avatar>\n\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n\n    </ion-item>\n\n    <!-- <ion-item>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n        <ion-icon class="battery" name="ios-battery-full"></ion-icon>\n\n      </ion-avatar>\n\n      <p>sent to</p>\n\n      <h2 class="text-black cardno">gdsfg gf2g gfg1 dg12 g21g er12 ert1 yytr</h2>\n\n      <h2 class="amount">-0.0017</h2>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n      </ion-avatar>\n\n      <p>received with</p>\n\n      <h2 class="text-black cardno">My Bitcoin address</h2>\n\n      <h2 class="amountget">+0.0029</h2>\n\n    </ion-item> -->\n\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"D:\WORK\Alpesh\ionic-login-api\src\pages\balance\balance.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
 ], BalancePage);
@@ -411,10 +425,9 @@ WalletSendPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-wallet-send',template:/*ion-inline-start:"D:\WORK\Alpesh\ionic-login-api\src\pages\wallet-send\wallet-send.html"*/'<ion-content class="balance-bg">\n\n  <p class="payto">Pay To</p>\n\n  <ion-item>\n\n    <ion-label>\n\n      <img class="ftbcoin" src="assets/img/FTB.png" />\n\n    </ion-label>\n\n    <ion-input style="color:black" [(ngModel)]=\'RecieverName\'  (ionBlur)="checkBlur()" clearInput></ion-input>\n\n  </ion-item>\n\n\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <p class="payto">Amount (FTB)</p>\n\n        <ion-item>\n\n          <ion-input type="number" [(ngModel)]=\'FTBAmount\' style="color:black" clearInput></ion-input>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <p class="payto">Amount (USD)</p>\n\n        <ion-item>\n\n          <ion-input type="number" [(ngModel)]=\'USDAmount\' style="color:black" clearInput></ion-input>\n\n        </ion-item>\n\n      </ion-col>\n\n    </ion-row>\n\n    <ion-row>\n\n      <ion-col col-12>\n\n          <button class="sendbtn" (click)="sendBtnClick()" ion-button>SEND</button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"D:\WORK\Alpesh\ionic-login-api\src\pages\wallet-send\wallet-send.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
 ], WalletSendPage);
 
-var _a, _b, _c, _d, _e;
 //# sourceMappingURL=wallet-send.js.map
 
 /***/ }),
@@ -719,7 +732,7 @@ var MyApp = (function () {
             // Okay, so the platform is ready and our plugins are available.
             //*** Control Splash Screen
             // this.splashScreen.show();
-            // this.splashScreen.hide();
+            _this.splashScreen.hide();
             _this.loginProvider.GetDynamicAppMenu().then(function (reso) {
                 var dynamicList = [];
                 if (reso) {
