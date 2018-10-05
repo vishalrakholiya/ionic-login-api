@@ -1,12 +1,19 @@
-<!-- -->
-<ion-header>
-  <ion-navbar color="primary">
-    <ion-title>
-      <span ion-text>Receive</span>
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content class="balance-bg">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor='let tran of transactionList'>
+      <ion-avatar item-start>
+        <img src="assets/img/ionic3-ico.png">
+        <ion-icon *ngIf="tran.TicketTypeName == 'BUY' || tran.TicketTypeName == 'SEND'" class="battery" name="ios-battery-dead"></ion-icon>
+        <ion-icon *ngIf="tran.TicketTypeName == 'SELL' || tran.TicketTypeName == 'RECEIVE'" class="battery" name="ios-battery-full"></ion-icon>
+      </ion-avatar>
+      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>
+      <h2 class="text-black cardno">{{tran.Memo}}</h2>
+      <h2 *ngIf="tran.TicketTypeName == 'BUY' || tran.TicketTypeName == 'SEND'" class="amountfull">- {{tran.Credit}}</h2>
+      <h2 *ngIf="tran.TicketTypeName == 'SELL' || tran.TicketTypeName == 'RECEIVE'" class="amountget">+ {{tran.Debit}}</h2>
+    </ion-item>
+  </ion-list>
 </ion-content>

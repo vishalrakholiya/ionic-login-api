@@ -27514,6 +27514,24 @@ page-wallet .header-md::after, page-wallet .tabs-md[tabsPlacement="top"] > .tabb
   background-image: none;
 }
 
+page-wallet-receive .balance-bg,
+.wallet-receive .balance-bg {
+  background: #f3f3f3;
+}
+
+page-wallet-receive .battery,
+.wallet-receive .battery {
+  padding-top: 10%;
+  color: black;
+  padding-left: 30%;
+}
+
+page-wallet-receive .amountget,
+.wallet-receive .amountget {
+  color: green;
+  font-weight: bold;
+}
+
 page-wallet-send .balance-bg,
 .wallet-send .balance-bg {
   background: #f3f3f3;

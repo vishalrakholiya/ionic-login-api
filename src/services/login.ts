@@ -68,7 +68,13 @@ export class LoginProvider {
       });
     })
   }
-  
+  SetTicketStatus(id,value){
+    return new Promise((resolve,reject)=>{
+      this.http.get(`${this.url}/Home/SetTicketStatus?idTicket=${id}&value=${value}`).subscribe(res => {
+        resolve(res);
+      });
+    })
+  }
   // GetWallet(userid){
   //   return new Promise((resolve,reject)=>{
   //     this.http.get(`${this.url}/Home/GetWallet?UserId=${userid}`).subscribe(res => {

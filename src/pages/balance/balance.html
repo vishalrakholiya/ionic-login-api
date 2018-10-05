@@ -10,7 +10,7 @@
     <h3 class='black ftb'>FTB</h3>
   </ion-item>
   <ion-list>
-    <ion-item *ngFor='let tran of transactionList'>
+    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor='let tran of transactionList'>
       <ion-avatar item-start>
         <img src="assets/img/ionic3-ico.png">
         <ion-icon *ngIf="tran.TicketTypeName == 'BUY' || tran.TicketTypeName == 'SEND'" class="battery" name="ios-battery-dead"></ion-icon>

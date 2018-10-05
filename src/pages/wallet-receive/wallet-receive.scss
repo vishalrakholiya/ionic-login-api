@@ -1,4 +1,15 @@
 page-wallet-receive,
 .wallet-receive {
-	
+	.balance-bg{
+    background: #f3f3f3;
+  }
+  .battery{
+    padding-top: 10%;
+    color: black;
+    padding-left: 30%;
+  }
+  .amountget{
+    color: green;
+    font-weight: bold;
+  }
 }
