@@ -82,7 +82,7 @@ __decorate([
 ], HomePage.prototype, "content", void 0);
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/home/home.html"*/'<!-- -->\n<ion-header>\n  <ion-navbar color="gray">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      <strong>Messages</strong>\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content #content>\n  <ion-refresher *ngIf="pageNo < TotalPage" (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <ion-list>\n\n    <ion-item *ngFor=\'let msg of trips\' (click)="msgClick(msg.idMessageSerial,msg.actionLink)">\n      <div *ngIf="msg.idMessageType == 2">\n        <p class="txtCenter">{{msg.DisplayName}}</p>\n        <img style="width:100%;height:100%;object-fit: cover;" src="{{msg.headerimge}}">\n        <p class="txtCenter">{{msg.txtMessage}}</p>\n      </div>\n      <ion-avatar item-start *ngIf="msg.idMessageType != 2">\n        <img src="{{msg.siteIcon}}">\n      </ion-avatar>\n      <img *ngIf="msg.idMessageType == 1" style="width:100%;height:100%;object-fit: cover;" src="{{msg.headerimge}}">\n      <h2 *ngIf="msg.idMessageType != 2" class="text-black">{{msg.Username}}@frontier<span class="msgAge">{{msg.Age}}</span></h2>\n      <p *ngIf="msg.idMessageType != 2">{{msg.txtMessage}}</p>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n      </ion-avatar>\n      <h2 class="text-black">Finn</h2>\n      <p>I\'ve had a pretty messed up day. If we just...</p>\n    </ion-item> -->\n  </ion-list>\n\n  <!-- <div class="chatBubble" *ngFor=\'let msg of trips\'>\n    <div class="chat-bubble right">\n      <div class="message">{{msg.txtMessage}}</div>\n      <div class="message-detail">\n          <span>{{msg.dateReceived}}</span>\n      </div>\n    </div>\n    <br>\n  </div> -->\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"D:\WORK\Alpesh\ionic-login-api\src\pages\home\home.html"*/'<!-- -->\n\n<ion-header>\n\n  <ion-navbar color="gray">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      <strong>Messages</strong>\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content #content>\n\n  <ion-refresher *ngIf="pageNo < TotalPage" (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n  <ion-list>\n\n\n\n    <ion-item *ngFor=\'let msg of trips\' (click)="msgClick(msg.idMessageSerial,msg.actionLink)">\n\n      <div *ngIf="msg.idMessageType == 2">\n\n        <p class="txtCenter">{{msg.DisplayName}}</p>\n\n        <img style="width:100%;height:100%;object-fit: cover;" src="{{msg.headerimge}}">\n\n        <p class="txtCenter">{{msg.txtMessage}}</p>\n\n      </div>\n\n      <ion-avatar item-start *ngIf="msg.idMessageType != 2">\n\n        <img src="{{msg.siteIcon}}">\n\n      </ion-avatar>\n\n      <img *ngIf="msg.idMessageType == 1" style="width:100%;height:100%;object-fit: cover;" src="{{msg.headerimge}}">\n\n      <h2 *ngIf="msg.idMessageType != 2" class="text-black">{{msg.Username}}@frontier<span class="msgAge">{{msg.Age}}</span></h2>\n\n      <p *ngIf="msg.idMessageType != 2">{{msg.txtMessage}}</p>\n\n    </ion-item>\n\n    <!-- <ion-item>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n      </ion-avatar>\n\n      <h2 class="text-black">Finn</h2>\n\n      <p>I\'ve had a pretty messed up day. If we just...</p>\n\n    </ion-item> -->\n\n  </ion-list>\n\n\n\n  <!-- <div class="chatBubble" *ngFor=\'let msg of trips\'>\n\n    <div class="chat-bubble right">\n\n      <div class="message">{{msg.txtMessage}}</div>\n\n      <div class="message-detail">\n\n          <span>{{msg.dateReceived}}</span>\n\n      </div>\n\n    </div>\n\n    <br>\n\n  </div> -->\n\n</ion-content>'/*ion-inline-end:"D:\WORK\Alpesh\ionic-login-api\src\pages\home\home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__["a" /* InAppBrowser */], __WEBPACK_IMPORTED_MODULE_3__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* PopoverController */]])
 ], HomePage);
@@ -130,7 +130,7 @@ var WalletPage = (function () {
 }());
 WalletPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-wallet',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet/wallet.html"*/'<ion-header>\n  <ion-navbar color="gray">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n    <ion-title>\n      <strong>FrontierCoin<ion-icon style="float: right;" name="md-more"></ion-icon><ion-icon style="float: right;padding-right: 15px;" name="md-barcode"></ion-icon></strong>\n    </ion-title>\n    <!-- \n     -->\n\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <super-tabs style="height: 100%">\n    <super-tab [root]="page1" title="receive"></super-tab>\n    <super-tab [root]="page2" title="balance"></super-tab>\n    <super-tab [root]="page3" title="send"></super-tab>\n  </super-tabs>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet/wallet.html"*/,
+        selector: 'page-wallet',template:/*ion-inline-start:"D:\WORK\Alpesh\ionic-login-api\src\pages\wallet\wallet.html"*/'<ion-header>\n\n  <ion-navbar color="gray">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n\n\n    </button>\n\n    <ion-title>\n\n      <strong>FrontierCoin<ion-icon style="float: right;" name="md-more"></ion-icon><ion-icon style="float: right;padding-right: 15px;" name="md-barcode"></ion-icon></strong>\n\n    </ion-title>\n\n    <!-- \n\n     -->\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n  <super-tabs style="height: 100%">\n\n    <super-tab [root]="page1" title="receive"></super-tab>\n\n    <super-tab [root]="page2" title="balance"></super-tab>\n\n    <super-tab [root]="page3" title="send"></super-tab>\n\n  </super-tabs>\n\n</ion-content>'/*ion-inline-end:"D:\WORK\Alpesh\ionic-login-api\src\pages\wallet\wallet.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]])
 ], WalletPage);
@@ -308,7 +308,7 @@ var BalancePage = (function () {
 }());
 BalancePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-balance',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/balance/balance.html"*/'<ion-content class="balance-bg">\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"\n      refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <ion-item class="txtCenter">\n    <h4 class=\'black usd\'>{{walletExchangeValue}} USD</h4>\n    <h1 class=\'black btcoin\'>{{walletTokenCount}}</h1>\n    <h3 class=\'black ftb\'>FTB</h3>\n  </ion-item>\n  <ion-list>\n    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor=\'let tran of transactionList\'>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>sent to</p>\n      <h2 class="text-black cardno">gdsfg gf2g gfg1 dg12 g21g er12 ert1 yytr</h2>\n      <h2 class="amount">-0.0017</h2>\n    </ion-item>\n    <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n      </ion-avatar>\n      <p>received with</p>\n      <h2 class="text-black cardno">My Bitcoin address</h2>\n      <h2 class="amountget">+0.0029</h2>\n    </ion-item> -->\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/balance/balance.html"*/
+        selector: 'page-balance',template:/*ion-inline-start:"D:\WORK\Alpesh\ionic-login-api\src\pages\balance\balance.html"*/'<ion-content class="balance-bg">\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"\n\n      refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n  <ion-item class="txtCenter">\n\n    <h4 class=\'black usd\'>{{walletExchangeValue}} USD</h4>\n\n    <h1 class=\'black btcoin\'>{{walletTokenCount}}</h1>\n\n    <h3 class=\'black ftb\'>FTB</h3>\n\n  </ion-item>\n\n  <ion-list>\n\n    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor=\'let tran of transactionList\'>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n\n      </ion-avatar>\n\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n\n    </ion-item>\n\n    <!-- <ion-item>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n        <ion-icon class="battery" name="ios-battery-full"></ion-icon>\n\n      </ion-avatar>\n\n      <p>sent to</p>\n\n      <h2 class="text-black cardno">gdsfg gf2g gfg1 dg12 g21g er12 ert1 yytr</h2>\n\n      <h2 class="amount">-0.0017</h2>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n      </ion-avatar>\n\n      <p>received with</p>\n\n      <h2 class="text-black cardno">My Bitcoin address</h2>\n\n      <h2 class="amountget">+0.0029</h2>\n\n    </ion-item> -->\n\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"D:\WORK\Alpesh\ionic-login-api\src\pages\balance\balance.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
 ], BalancePage);
@@ -437,7 +437,7 @@ var WalletReceivePage = (function () {
 }());
 WalletReceivePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-wallet-receive',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-receive/wallet-receive.html"*/'<ion-content class="balance-bg">\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <ion-list>\n    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor=\'let tran of transactionList\'>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n    </ion-item>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-receive/wallet-receive.html"*/
+        selector: 'page-wallet-receive',template:/*ion-inline-start:"D:\WORK\Alpesh\ionic-login-api\src\pages\wallet-receive\wallet-receive.html"*/'<ion-content class="balance-bg">\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n  <ion-list>\n\n    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor=\'let tran of transactionList\'>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n\n      </ion-avatar>\n\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n\n    </ion-item>\n\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"D:\WORK\Alpesh\ionic-login-api\src\pages\wallet-receive\wallet-receive.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
 ], WalletReceivePage);
@@ -469,10 +469,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var WalletSendPage = (function () {
-    function WalletSendPage(navCtrl, navParams, loginProvider, toastCtrl, storage) {
+    function WalletSendPage(navCtrl, navParams, loginProvider, alertCtrl, toastCtrl, storage) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.loginProvider = loginProvider;
+        this.alertCtrl = alertCtrl;
         this.toastCtrl = toastCtrl;
         this.storage = storage;
         this.RecieverName = '';
@@ -488,6 +489,7 @@ var WalletSendPage = (function () {
         this.storage.get('LoggedUserName').then(function (username) {
             _this.SenderName = username;
         });
+        this.getTranList();
     };
     WalletSendPage.prototype.checkBlur = function () {
         var _this = this;
@@ -566,13 +568,96 @@ var WalletSendPage = (function () {
             });
         }
     };
+    WalletSendPage.prototype.doRefresh = function (refresher) {
+        var _this = this;
+        this.storage.get('LoggedUserId').then(function (userid) {
+            _this.loginProvider.GetWalletAndTransactions(userid).then(function (data) {
+                if (data[0]) {
+                    _this.transactionList = data;
+                    _this.transactionList = _this.transactionList.filter(function (item) {
+                        return item.idTicketType == 3;
+                    });
+                }
+                refresher.complete();
+            });
+        });
+    };
+    WalletSendPage.prototype.getTranList = function () {
+        var _this = this;
+        this.storage.get('LoggedUserId').then(function (userid) {
+            _this.loginProvider.GetWalletAndTransactions(userid).then(function (data) {
+                if (data[0]) {
+                    _this.transactionList = data;
+                    _this.transactionList = _this.transactionList.filter(function (item) {
+                        return item.idTicketType == 3;
+                    });
+                }
+            });
+        });
+    };
+    WalletSendPage.prototype.presentConfirm = function (idTicket) {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Confirm Transaction',
+            message: 'What do you want to do with this transaction?',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('Cancel clicked', idTicket);
+                    }
+                },
+                {
+                    text: 'Decline',
+                    handler: function () {
+                        _this.loginProvider.SetTicketStatus(idTicket, 3).then(function (data) {
+                            console.log('data dec', data);
+                            if (data) {
+                                _this.getTranList();
+                                var toast = _this.toastCtrl.create({
+                                    message: 'Transaction Declined.',
+                                    duration: 3000,
+                                    position: 'top',
+                                    cssClass: 'dark-trans',
+                                    closeButtonText: 'OK',
+                                    showCloseButton: true
+                                });
+                                toast.present();
+                            }
+                        });
+                    }
+                },
+                {
+                    text: 'Accept',
+                    handler: function () {
+                        _this.loginProvider.SetTicketStatus(idTicket, 1).then(function (data) {
+                            if (data) {
+                                _this.getTranList();
+                                var toast = _this.toastCtrl.create({
+                                    message: 'Transaction accepted successfully.',
+                                    duration: 3000,
+                                    position: 'top',
+                                    cssClass: 'dark-trans',
+                                    closeButtonText: 'OK',
+                                    showCloseButton: true
+                                });
+                                toast.present();
+                            }
+                        });
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
     return WalletSendPage;
 }());
 WalletSendPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-wallet-send',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-send/wallet-send.html"*/'<ion-content class="balance-bg">\n  <p class="payto">Pay To</p>\n  <ion-item>\n    <ion-label>\n      <img class="ftbcoin" src="assets/img/FTB.png" />\n    </ion-label>\n    <ion-input style="color:black" [(ngModel)]=\'RecieverName\'  (ionBlur)="checkBlur()" clearInput></ion-input>\n  </ion-item>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col col-6>\n        <p class="payto">Amount (FTB)</p>\n        <ion-item>\n          <ion-input type="number" [(ngModel)]=\'FTBAmount\' style="color:black" clearInput></ion-input>\n        </ion-item>\n      </ion-col>\n      <ion-col col-6>\n        <p class="payto">Amount (USD)</p>\n        <ion-item>\n          <ion-input type="number" [(ngModel)]=\'USDAmount\' style="color:black" clearInput></ion-input>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-12>\n          <button class="sendbtn" (click)="sendBtnClick()" ion-button>SEND</button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-send/wallet-send.html"*/
+        selector: 'page-wallet-send',template:/*ion-inline-start:"D:\WORK\Alpesh\ionic-login-api\src\pages\wallet-send\wallet-send.html"*/'<ion-content class="balance-bg">\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"\n\n      refreshingText="Refreshing...">\n\n    </ion-refresher-content>\n\n  </ion-refresher>\n\n  <p class="payto">Pay To</p>\n\n  <ion-item>\n\n    <ion-label>\n\n      <img class="ftbcoin" src="assets/img/FTB.png" />\n\n    </ion-label>\n\n    <ion-input style="color:black" [(ngModel)]=\'RecieverName\' (ionBlur)="checkBlur()" clearInput></ion-input>\n\n  </ion-item>\n\n\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <p class="payto">Amount (FTB)</p>\n\n        <ion-item>\n\n          <ion-input type="number" [(ngModel)]=\'FTBAmount\' style="color:black" clearInput></ion-input>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <p class="payto">Amount (USD)</p>\n\n        <ion-item>\n\n          <ion-input type="number" [(ngModel)]=\'USDAmount\' style="color:black" clearInput></ion-input>\n\n        </ion-item>\n\n      </ion-col>\n\n    </ion-row>\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button class="sendbtn" (click)="sendBtnClick()" ion-button>SEND</button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n  <ion-list>\n\n    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor=\'let tran of transactionList\'>\n\n      <ion-avatar item-start>\n\n        <img src="assets/img/ionic3-ico.png">\n\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n\n      </ion-avatar>\n\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n\n    </ion-item>\n\n    </ion-list>\n\n</ion-content>'/*ion-inline-end:"D:\WORK\Alpesh\ionic-login-api\src\pages\wallet-send\wallet-send.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
 ], WalletSendPage);
 
 //# sourceMappingURL=wallet-send.js.map
@@ -689,7 +774,7 @@ var LoginPage = (function () {
 }());
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-login',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/login/login.html"*/'<!-- -->\n<ion-content padding class="animated fadeIn login auth-page">\n  <div class="login-content">\n\n    <!-- Logo -->\n    <div padding-horizontal text-center class="animated fadeInDown">\n      <div class="logo"></div>\n    </div>\n    <ion-item class="inputbox">\n      <ion-label class="lblicon">\n        <ion-icon name="person"></ion-icon>\n      </ion-label>\n      <ion-input [(ngModel)]=\'email\' style="font-style: italic;" placeholder="Enter Username" clearInput></ion-input>\n    </ion-item>\n    <ion-item class="inputbox">\n      <ion-label class="lblicon">\n        <ion-icon name="ios-key"></ion-icon>\n      </ion-label>\n      <ion-input type="password" style="font-style: italic;" [(ngModel)]=\'password\' placeholder="Enter Password" clearInput></ion-input>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-label floating>\n        <ion-icon name="person" item-start class="text-primary"></ion-icon>\n        Enter UserName\n      </ion-label>\n      <ion-input type="email" [(ngModel)]=\'email\'></ion-input>\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label>\n        <ion-icon name="ios-key" item-start class="text-primary"></ion-icon>\n        Enter Password\n      </ion-label>\n      <ion-input type="password" [(ngModel)]=\'password\'></ion-input>\n    </ion-item> -->\n\n    <ion-item class="checkboxline">\n      <ion-label class="logged">Keep me logged in</ion-label>\n      <ion-checkbox style="margin-right:15px;margin-left: 0px;" [(ngModel)]="RememberMe"></ion-checkbox>\n      <button ion-button icon-start block color="dark" tappable (click)="login()" item-right> LOGIN >> </button>\n    </ion-item>\n    <div>\n\n      <div style="margin-right:16px;" text-right>\n        <span style="font-style: italic;" ion-text color="secondary" tappable (click)="register()"><span style="color: white;">Or</span> <strong>Register</strong></span>\n      </div>\n\n\n    </div>\n  </div>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/login/login.html"*/
+        selector: 'page-login',template:/*ion-inline-start:"D:\WORK\Alpesh\ionic-login-api\src\pages\login\login.html"*/'<!-- -->\n\n<ion-content padding class="animated fadeIn login auth-page">\n\n  <div class="login-content">\n\n\n\n    <!-- Logo -->\n\n    <div padding-horizontal text-center class="animated fadeInDown">\n\n      <div class="logo"></div>\n\n    </div>\n\n    <ion-item class="inputbox">\n\n      <ion-label class="lblicon">\n\n        <ion-icon name="person"></ion-icon>\n\n      </ion-label>\n\n      <ion-input [(ngModel)]=\'email\' style="font-style: italic;" placeholder="Enter Username" clearInput></ion-input>\n\n    </ion-item>\n\n    <ion-item class="inputbox">\n\n      <ion-label class="lblicon">\n\n        <ion-icon name="ios-key"></ion-icon>\n\n      </ion-label>\n\n      <ion-input type="password" style="font-style: italic;" [(ngModel)]=\'password\' placeholder="Enter Password" clearInput></ion-input>\n\n    </ion-item>\n\n    <!-- <ion-item>\n\n      <ion-label floating>\n\n        <ion-icon name="person" item-start class="text-primary"></ion-icon>\n\n        Enter UserName\n\n      </ion-label>\n\n      <ion-input type="email" [(ngModel)]=\'email\'></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n\n\n      <ion-label>\n\n        <ion-icon name="ios-key" item-start class="text-primary"></ion-icon>\n\n        Enter Password\n\n      </ion-label>\n\n      <ion-input type="password" [(ngModel)]=\'password\'></ion-input>\n\n    </ion-item> -->\n\n\n\n    <ion-item class="checkboxline">\n\n      <ion-label class="logged">Keep me logged in</ion-label>\n\n      <ion-checkbox style="margin-right:15px;margin-left: 0px;" [(ngModel)]="RememberMe"></ion-checkbox>\n\n      <button ion-button icon-start block color="dark" tappable (click)="login()" item-right> LOGIN >> </button>\n\n    </ion-item>\n\n    <div>\n\n\n\n      <div style="margin-right:16px;" text-right>\n\n        <span style="font-style: italic;" ion-text color="secondary" tappable (click)="register()"><span style="color: white;">Or</span> <strong>Register</strong></span>\n\n      </div>\n\n\n\n\n\n    </div>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"D:\WORK\Alpesh\ionic-login-api\src\pages\login\login.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__ionic_native_in_app_browser__["a" /* InAppBrowser */], __WEBPACK_IMPORTED_MODULE_4__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* MenuController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */]])
 ], LoginPage);
@@ -928,7 +1013,7 @@ __decorate([
     __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Nav */])
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/app/app.html"*/'<ion-menu side="left" id="authenticated" [content]="content">\n  <ion-header>\n    <ion-toolbar class="user-profile">\n\n      <ion-grid>\n        <ion-row>\n          <ion-col col-12>\n              <img style="width: 90%;padding-top: 10px;padding-left: 5px;" src="assets/img/frontierlogo.png">\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content color="primary">\n\n    <ion-list class="user-list">\n      <button ion-item menuClose class="text-1x" *ngFor="let menuItem of appMenuItems" (click)="openPage(menuItem)">\n        <ion-icon item-left [name]="menuItem.icon" color="gray"></ion-icon>\n        <span ion-text color="gray">{{menuItem.title}}</span>\n      </button>\n      <button ion-item menuClose class="text-1x" *ngFor="let DmenuItem of DynamicappMenuItems" (click)="openLink(DmenuItem.urllink)">\n        <ion-icon item-left [name]="DmenuItem.icon" color="gray"></ion-icon>\n        <span ion-text color="gray">{{DmenuItem.title}}</span>\n      </button>\n    </ion-list>\n    <ion-list class="user-list">\n      <button ion-item menuClose class="text-1x" (click)="logout()">\n        <ion-icon item-left name="md-log-out"  color="gray"></ion-icon>\n        <span ion-text color="gray">LOG OUT</span>\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"D:\WORK\Alpesh\ionic-login-api\src\app\app.html"*/'<ion-menu side="left" id="authenticated" [content]="content">\n\n  <ion-header>\n\n    <ion-toolbar class="user-profile">\n\n\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-12>\n\n              <img style="width: 90%;padding-top: 10px;padding-left: 5px;" src="assets/img/frontierlogo.png">\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n  <ion-content color="primary">\n\n\n\n    <ion-list class="user-list">\n\n      <button ion-item menuClose class="text-1x" *ngFor="let menuItem of appMenuItems" (click)="openPage(menuItem)">\n\n        <ion-icon item-left [name]="menuItem.icon" color="gray"></ion-icon>\n\n        <span ion-text color="gray">{{menuItem.title}}</span>\n\n      </button>\n\n      <button ion-item menuClose class="text-1x" *ngFor="let DmenuItem of DynamicappMenuItems" (click)="openLink(DmenuItem.urllink)">\n\n        <ion-icon item-left [name]="DmenuItem.icon" color="gray"></ion-icon>\n\n        <span ion-text color="gray">{{DmenuItem.title}}</span>\n\n      </button>\n\n    </ion-list>\n\n    <ion-list class="user-list">\n\n      <button ion-item menuClose class="text-1x" (click)="logout()">\n\n        <ion-icon item-left name="md-log-out"  color="gray"></ion-icon>\n\n        <span ion-text color="gray">LOG OUT</span>\n\n      </button>\n\n    </ion-list>\n\n  </ion-content>\n\n\n\n</ion-menu>\n\n\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"D:\WORK\Alpesh\ionic-login-api\src\app\app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* Platform */],
         __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */],

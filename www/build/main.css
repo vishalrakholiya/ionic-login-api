@@ -27557,3 +27557,16 @@ page-wallet-send .sendbtn,
   margin: 16px;
   background: #858d97;
 }
+
+page-wallet-send .battery,
+.wallet-send .battery {
+  padding-top: 10%;
+  color: black;
+  padding-left: 30%;
+}
+
+page-wallet-send .amountfull,
+.wallet-send .amountfull {
+  color: red;
+  font-weight: bold;
+}
