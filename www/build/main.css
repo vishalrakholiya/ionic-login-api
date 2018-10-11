@@ -27532,6 +27532,39 @@ page-wallet-receive .amountget,
   font-weight: bold;
 }
 
+page-wallet-receive .black,
+.wallet-receive .black {
+  color: black;
+}
+
+page-wallet-receive .txtCenter,
+.wallet-receive .txtCenter {
+  text-align: center;
+}
+
+page-wallet-receive .btcoin,
+.wallet-receive .btcoin {
+  font-size: 5.0rem;
+  width: 50%;
+  margin-left: 25%;
+}
+
+page-wallet-receive .usd,
+.wallet-receive .usd {
+  font-size: 2.0rem;
+  width: 50%;
+  margin-left: 25%;
+  text-align: left;
+}
+
+page-wallet-receive .ftb,
+.wallet-receive .ftb {
+  font-size: 2.0rem;
+  width: 50%;
+  margin-left: 25%;
+  text-align: right;
+}
+
 page-wallet-send .balance-bg,
 .wallet-send .balance-bg {
   background: #f3f3f3;

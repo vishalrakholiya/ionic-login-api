@@ -85,6 +85,7 @@ export class WalletSendPage {
             showCloseButton: true
           });
           toast.present();
+          this.getTranList();
           this.RecieverName= '';
           this.FTBAmount= '';
           this.USDAmount= '';
@@ -109,7 +110,7 @@ export class WalletSendPage {
         if (data[0]) {
           this.transactionList = data;
           this.transactionList = this.transactionList.filter(function (item) {
-            return item.idTicketType == 3;
+            return item.idTicketType == 3 && item.status == 0;
           })
         } 
         refresher.complete();
@@ -123,7 +124,7 @@ export class WalletSendPage {
         if (data[0]) {
           this.transactionList = data;
           this.transactionList = this.transactionList.filter(function (item) {
-            return item.idTicketType == 3;
+            return item.idTicketType == 3 && item.status == 0;
           })
         }
       });

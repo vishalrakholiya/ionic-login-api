@@ -21,10 +21,13 @@ export class BalancePage {
   doRefresh(refresher) {
     this.storage.get('LoggedUserId').then((userid) => {
       this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
-        if (data[0]) {
-          this.walletTokenCount = data[0].WalletTokenCount;
-          this.walletExchangeValue = data[0].WalletExchangeValue;
+        if (data) {
           this.transactionList = data;
+          this.transactionList = this.transactionList.filter(function (item) {
+            return item.status == 0;
+          });
+          this.walletTokenCount = this.transactionList[0].WalletTokenCount;
+          this.walletExchangeValue = this.transactionList[0].WalletExchangeValue;
         } else {
           this.walletTokenCount = 0;
           this.walletExchangeValue = 0;
@@ -37,10 +40,13 @@ export class BalancePage {
   getTranList() {
     this.storage.get('LoggedUserId').then((userid) => {
       this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
-        if (data[0]) {
-          this.walletTokenCount = data[0].WalletTokenCount;
-          this.walletExchangeValue = data[0].WalletExchangeValue;
+        if (data) {
           this.transactionList = data;
+          this.transactionList = this.transactionList.filter(function (item) {
+            return item.status == 0;
+          });
+          this.walletTokenCount = this.transactionList[0].WalletTokenCount;
+          this.walletExchangeValue = this.transactionList[0].WalletExchangeValue;
         } else {
           this.walletTokenCount = 0;
           this.walletExchangeValue = 0;
@@ -66,8 +72,8 @@ export class BalancePage {
           text: 'Decline',
           handler: () => {
             this.loginProvider.SetTicketStatus(idTicket, 3).then((data) => {
-              console.log('data dec',data);
-              
+              console.log('data dec', data);
+
               if (data) {
                 this.getTranList();
                 let toast = this.toastCtrl.create({

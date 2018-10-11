@@ -8,7 +8,10 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'wallet-receive.html'
 })
 export class WalletReceivePage {
+  public walletTokenCount: any;
+  public walletExchangeValue: any;
   public transactionList: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, private storage: Storage, public toastCtrl: ToastController, private alertCtrl: AlertController) {
   }
 
@@ -18,11 +21,21 @@ export class WalletReceivePage {
   doRefresh(refresher) {
     this.storage.get('LoggedUserId').then((userid) => {
       this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
-        if (data[0]) {
+        if (data) {
           this.transactionList = data;
-          this.transactionList = this.transactionList.filter(function (item) {
-            return item.idTicketType == 4;
+          let tokenSum = 0;
+          let tokenRateSum = 0;
+          this.transactionList.forEach(function (item) {
+            if (item.status == 1) {
+              tokenSum = (tokenSum + parseFloat(item.Credit));
+              tokenRateSum = (tokenRateSum + (parseFloat(item.Credit) * parseFloat(item.Rate)))
+            }
           })
+          this.transactionList = this.transactionList.filter(function (item) {
+            return item.idTicketType == 4 && item.status == 0;
+          })
+          this.walletTokenCount = (tokenSum).toFixed(2);
+          this.walletExchangeValue = (tokenRateSum).toFixed(2);
         }
         refresher.complete();
       });
@@ -31,11 +44,21 @@ export class WalletReceivePage {
   getTranList() {
     this.storage.get('LoggedUserId').then((userid) => {
       this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
-        if (data[0]) {
+        if (data) {
           this.transactionList = data;
-          this.transactionList = this.transactionList.filter(function (item) {
-            return item.idTicketType == 4;
+          let tokenSum = 0;
+          let tokenRateSum = 0;
+          this.transactionList.forEach(function (item) {
+            if (item.status == 1) {
+              tokenSum = (tokenSum + parseFloat(item.Credit));
+              tokenRateSum = (tokenRateSum + (parseFloat(item.Credit) * parseFloat(item.Rate)))
+            }
           })
+          this.transactionList = this.transactionList.filter(function (item) {
+            return item.idTicketType == 4 && item.status == 0;
+          });
+          this.walletTokenCount = (tokenSum).toFixed(2);
+          this.walletExchangeValue = (tokenRateSum).toFixed(2);
         }
       });
     });
