@@ -72,7 +72,6 @@ export class WalletSendPage {
       });
       toast.present();
     }
-
     else {
       this.loginProvider.SendTokens(this.SenderID,this.RecieverID,this.FTBAmount,this.SenderName,this.RecieverName).then((data) => {
         if(data == "Success"){
@@ -107,10 +106,10 @@ export class WalletSendPage {
   doRefresh(refresher) {
     this.storage.get('LoggedUserId').then((userid) => {
       this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
-        if (data[0]) {
+        if (data) {
           this.transactionList = data;
           this.transactionList = this.transactionList.filter(function (item) {
-            return item.idTicketType == 3 && item.status == 0;
+            return item.idTicketType == 4 && item.status == 0;
           })
         } 
         refresher.complete();
@@ -121,10 +120,10 @@ export class WalletSendPage {
   getTranList() {
     this.storage.get('LoggedUserId').then((userid) => {
       this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
-        if (data[0]) {
+        if (data) {
           this.transactionList = data;
           this.transactionList = this.transactionList.filter(function (item) {
-            return item.idTicketType == 3 && item.status == 0;
+            return item.idTicketType == 4 && item.status == 0;
           })
         }
       });

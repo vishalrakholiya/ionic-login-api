@@ -25,14 +25,14 @@ export class WalletReceivePage {
           this.transactionList = data;
           let tokenSum = 0;
           let tokenRateSum = 0;
-          this.transactionList.forEach(function (item) {
-            if (item.status == 1) {
-              tokenSum = (tokenSum + parseFloat(item.Credit));
-              tokenRateSum = (tokenRateSum + (parseFloat(item.Credit) * parseFloat(item.Rate)))
-            }
-          })
           this.transactionList = this.transactionList.filter(function (item) {
-            return item.idTicketType == 4 && item.status == 0;
+            return item.idTicketType == 3 && item.status == 0;
+          })
+          this.transactionList.forEach(function (item) {
+            if (item.idTicketType == 3 && item.status == 0) {
+              tokenSum = (tokenSum + parseFloat(item.Debit));
+              tokenRateSum = (tokenRateSum + (parseFloat(item.Debit) * parseFloat(item.WalletExchangeValue)))
+            }
           })
           this.walletTokenCount = (tokenSum).toFixed(2);
           this.walletExchangeValue = (tokenRateSum).toFixed(2);
@@ -48,15 +48,15 @@ export class WalletReceivePage {
           this.transactionList = data;
           let tokenSum = 0;
           let tokenRateSum = 0;
+          this.transactionList = this.transactionList.filter(function (item) {
+            return item.idTicketType == 3 && item.status == 0;
+          })
           this.transactionList.forEach(function (item) {
-            if (item.status == 1) {
-              tokenSum = (tokenSum + parseFloat(item.Credit));
-              tokenRateSum = (tokenRateSum + (parseFloat(item.Credit) * parseFloat(item.Rate)))
+            if (item.idTicketType == 3 && item.status == 0) {
+              tokenSum = (tokenSum + parseFloat(item.Debit));
+              tokenRateSum = (tokenRateSum + (parseFloat(item.Debit) * parseFloat(item.WalletExchangeValue)))
             }
           })
-          this.transactionList = this.transactionList.filter(function (item) {
-            return item.idTicketType == 4 && item.status == 0;
-          });
           this.walletTokenCount = (tokenSum).toFixed(2);
           this.walletExchangeValue = (tokenRateSum).toFixed(2);
         }

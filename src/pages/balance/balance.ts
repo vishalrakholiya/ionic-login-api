@@ -23,11 +23,19 @@ export class BalancePage {
       this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
         if (data) {
           this.transactionList = data;
+          let tokenSum = 0;
+          let tokenRateSum = 0;
           this.transactionList = this.transactionList.filter(function (item) {
-            return item.status == 0;
+            return item.status == 1;
           });
-          this.walletTokenCount = this.transactionList[0].WalletTokenCount;
-          this.walletExchangeValue = this.transactionList[0].WalletExchangeValue;
+          this.transactionList.forEach(function (item) {
+            if (item.status == 1) {
+              tokenSum = (tokenSum + (parseFloat(item.Debit) - parseFloat(item.Credit)));
+              tokenRateSum = (tokenRateSum + ((parseFloat(item.Debit) - parseFloat(item.Credit)) * parseFloat(item.Rate)))
+            }
+          })
+          this.walletTokenCount = (tokenSum).toFixed(2);
+          this.walletExchangeValue = (tokenRateSum).toFixed(2);
         } else {
           this.walletTokenCount = 0;
           this.walletExchangeValue = 0;
@@ -42,15 +50,22 @@ export class BalancePage {
       this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
         if (data) {
           this.transactionList = data;
+          let tokenSum = 0;
+          let tokenRateSum = 0;
           this.transactionList = this.transactionList.filter(function (item) {
-            return item.status == 0;
+            return item.status == 1;
           });
-          this.walletTokenCount = this.transactionList[0].WalletTokenCount;
-          this.walletExchangeValue = this.transactionList[0].WalletExchangeValue;
+          this.transactionList.forEach(function (item) {
+            if (item.status == 1) {
+              tokenSum = (tokenSum + (parseFloat(item.Debit) - parseFloat(item.Credit)));
+              tokenRateSum = (tokenRateSum + ((parseFloat(item.Debit) - parseFloat(item.Credit)) * parseFloat(item.Rate)))
+            }
+          })
+          this.walletTokenCount = (tokenSum).toFixed(2);
+          this.walletExchangeValue = (tokenRateSum).toFixed(2);
         } else {
           this.walletTokenCount = 0;
           this.walletExchangeValue = 0;
-
         }
       });
     });

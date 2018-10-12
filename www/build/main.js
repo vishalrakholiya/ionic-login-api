@@ -221,11 +221,19 @@ var BalancePage = (function () {
             _this.loginProvider.GetWalletAndTransactions(userid).then(function (data) {
                 if (data) {
                     _this.transactionList = data;
+                    var tokenSum_1 = 0;
+                    var tokenRateSum_1 = 0;
                     _this.transactionList = _this.transactionList.filter(function (item) {
-                        return item.status == 0;
+                        return item.status == 1;
                     });
-                    _this.walletTokenCount = _this.transactionList[0].WalletTokenCount;
-                    _this.walletExchangeValue = _this.transactionList[0].WalletExchangeValue;
+                    _this.transactionList.forEach(function (item) {
+                        if (item.status == 1) {
+                            tokenSum_1 = (tokenSum_1 + (parseFloat(item.Debit) - parseFloat(item.Credit)));
+                            tokenRateSum_1 = (tokenRateSum_1 + ((parseFloat(item.Debit) - parseFloat(item.Credit)) * parseFloat(item.Rate)));
+                        }
+                    });
+                    _this.walletTokenCount = (tokenSum_1).toFixed(2);
+                    _this.walletExchangeValue = (tokenRateSum_1).toFixed(2);
                 }
                 else {
                     _this.walletTokenCount = 0;
@@ -241,11 +249,19 @@ var BalancePage = (function () {
             _this.loginProvider.GetWalletAndTransactions(userid).then(function (data) {
                 if (data) {
                     _this.transactionList = data;
+                    var tokenSum_2 = 0;
+                    var tokenRateSum_2 = 0;
                     _this.transactionList = _this.transactionList.filter(function (item) {
-                        return item.status == 0;
+                        return item.status == 1;
                     });
-                    _this.walletTokenCount = _this.transactionList[0].WalletTokenCount;
-                    _this.walletExchangeValue = _this.transactionList[0].WalletExchangeValue;
+                    _this.transactionList.forEach(function (item) {
+                        if (item.status == 1) {
+                            tokenSum_2 = (tokenSum_2 + (parseFloat(item.Debit) - parseFloat(item.Credit)));
+                            tokenRateSum_2 = (tokenRateSum_2 + ((parseFloat(item.Debit) - parseFloat(item.Credit)) * parseFloat(item.Rate)));
+                        }
+                    });
+                    _this.walletTokenCount = (tokenSum_2).toFixed(2);
+                    _this.walletExchangeValue = (tokenRateSum_2).toFixed(2);
                 }
                 else {
                     _this.walletTokenCount = 0;
@@ -365,14 +381,14 @@ var WalletReceivePage = (function () {
                     _this.transactionList = data;
                     var tokenSum_1 = 0;
                     var tokenRateSum_1 = 0;
-                    _this.transactionList.forEach(function (item) {
-                        if (item.status == 1) {
-                            tokenSum_1 = (tokenSum_1 + parseFloat(item.Credit));
-                            tokenRateSum_1 = (tokenRateSum_1 + (parseFloat(item.Credit) * parseFloat(item.Rate)));
-                        }
-                    });
                     _this.transactionList = _this.transactionList.filter(function (item) {
-                        return item.idTicketType == 4 && item.status == 0;
+                        return item.idTicketType == 3 && item.status == 0;
+                    });
+                    _this.transactionList.forEach(function (item) {
+                        if (item.idTicketType == 3 && item.status == 0) {
+                            tokenSum_1 = (tokenSum_1 + parseFloat(item.Debit));
+                            tokenRateSum_1 = (tokenRateSum_1 + (parseFloat(item.Debit) * parseFloat(item.WalletExchangeValue)));
+                        }
                     });
                     _this.walletTokenCount = (tokenSum_1).toFixed(2);
                     _this.walletExchangeValue = (tokenRateSum_1).toFixed(2);
@@ -389,14 +405,14 @@ var WalletReceivePage = (function () {
                     _this.transactionList = data;
                     var tokenSum_2 = 0;
                     var tokenRateSum_2 = 0;
-                    _this.transactionList.forEach(function (item) {
-                        if (item.status == 1) {
-                            tokenSum_2 = (tokenSum_2 + parseFloat(item.Credit));
-                            tokenRateSum_2 = (tokenRateSum_2 + (parseFloat(item.Credit) * parseFloat(item.Rate)));
-                        }
-                    });
                     _this.transactionList = _this.transactionList.filter(function (item) {
-                        return item.idTicketType == 4 && item.status == 0;
+                        return item.idTicketType == 3 && item.status == 0;
+                    });
+                    _this.transactionList.forEach(function (item) {
+                        if (item.idTicketType == 3 && item.status == 0) {
+                            tokenSum_2 = (tokenSum_2 + parseFloat(item.Debit));
+                            tokenRateSum_2 = (tokenRateSum_2 + (parseFloat(item.Debit) * parseFloat(item.WalletExchangeValue)));
+                        }
                     });
                     _this.walletTokenCount = (tokenSum_2).toFixed(2);
                     _this.walletExchangeValue = (tokenRateSum_2).toFixed(2);
@@ -599,10 +615,10 @@ var WalletSendPage = (function () {
         var _this = this;
         this.storage.get('LoggedUserId').then(function (userid) {
             _this.loginProvider.GetWalletAndTransactions(userid).then(function (data) {
-                if (data[0]) {
+                if (data) {
                     _this.transactionList = data;
                     _this.transactionList = _this.transactionList.filter(function (item) {
-                        return item.idTicketType == 3 && item.status == 0;
+                        return item.idTicketType == 4 && item.status == 0;
                     });
                 }
                 refresher.complete();
@@ -613,10 +629,10 @@ var WalletSendPage = (function () {
         var _this = this;
         this.storage.get('LoggedUserId').then(function (userid) {
             _this.loginProvider.GetWalletAndTransactions(userid).then(function (data) {
-                if (data[0]) {
+                if (data) {
                     _this.transactionList = data;
                     _this.transactionList = _this.transactionList.filter(function (item) {
-                        return item.idTicketType == 3 && item.status == 0;
+                        return item.idTicketType == 4 && item.status == 0;
                     });
                 }
             });
