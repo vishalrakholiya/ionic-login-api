@@ -31,7 +31,7 @@ export class WalletReceivePage {
           this.transactionList.forEach(function (item) {
             if (item.idTicketType == 3 && item.status == 0) {
               tokenSum = (tokenSum + parseFloat(item.Debit));
-              tokenRateSum = (tokenRateSum + (parseFloat(item.Debit) * parseFloat(item.WalletExchangeValue)))
+              tokenRateSum = (tokenRateSum + (parseFloat(item.Debit) * parseFloat(item.Rate)))
             }
           })
           this.walletTokenCount = (tokenSum).toFixed(2);
@@ -54,7 +54,7 @@ export class WalletReceivePage {
           this.transactionList.forEach(function (item) {
             if (item.idTicketType == 3 && item.status == 0) {
               tokenSum = (tokenSum + parseFloat(item.Debit));
-              tokenRateSum = (tokenRateSum + (parseFloat(item.Debit) * parseFloat(item.WalletExchangeValue)))
+              tokenRateSum = (tokenRateSum + (parseFloat(item.Debit) * parseFloat(item.Rate)))
             }
           })
           this.walletTokenCount = (tokenSum).toFixed(2);
