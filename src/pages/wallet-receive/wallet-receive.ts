@@ -11,11 +11,15 @@ export class WalletReceivePage {
   public walletTokenCount: any;
   public walletExchangeValue: any;
   public transactionList: any;
+  public userId:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, private storage: Storage, public toastCtrl: ToastController, private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
+    this.storage.get('LoggedUserId').then((userid) => {
+      this.userId = userid;
+    })
     this.getTranList();
   }
   doRefresh(refresher) {
@@ -79,7 +83,7 @@ export class WalletReceivePage {
         {
           text: 'Decline',
           handler: () => {
-            this.loginProvider.SetTicketStatus(idTicket, 3).then((data) => {
+            this.loginProvider.SetTicketStatus(idTicket, 3,this.userId).then((data) => {
               if (data) {
                 this.getTranList();
                 let toast = this.toastCtrl.create({
@@ -98,7 +102,7 @@ export class WalletReceivePage {
         {
           text: 'Accept',
           handler: () => {
-            this.loginProvider.SetTicketStatus(idTicket, 1).then((data) => {
+            this.loginProvider.SetTicketStatus(idTicket, 1,this.userId).then((data) => {
               if (data) {
                 this.getTranList();
                 let toast = this.toastCtrl.create({

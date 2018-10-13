@@ -145,7 +145,7 @@ export class WalletSendPage {
         {
           text: 'Decline',
           handler: () => {
-            this.loginProvider.SetTicketStatus(idTicket, 3).then((data) => {
+            this.loginProvider.SetTicketStatus(idTicket, 3,this.SenderID).then((data) => {
               console.log('data dec',data);
               
               if (data) {
@@ -166,7 +166,7 @@ export class WalletSendPage {
         {
           text: 'Accept',
           handler: () => {
-            this.loginProvider.SetTicketStatus(idTicket, 1).then((data) => {
+            this.loginProvider.SetTicketStatus(idTicket, 1,this.SenderID).then((data) => {
               if (data) {
                 this.getTranList();
                 let toast = this.toastCtrl.create({

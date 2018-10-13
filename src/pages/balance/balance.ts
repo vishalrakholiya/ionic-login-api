@@ -1,9 +1,7 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams,  ToastController } from 'ionic-angular';
 import { LoginProvider } from "../../services/login";
 import { Storage } from '@ionic/storage';
-
-
 @Component({
   selector: 'page-balance',
   templateUrl: 'balance.html'
@@ -12,7 +10,7 @@ export class BalancePage {
   public walletTokenCount: any;
   public walletExchangeValue: any;
   public transactionList: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, public toastCtrl: ToastController, private storage: Storage, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, public toastCtrl: ToastController, private storage: Storage) {
   }
 
   ionViewDidLoad() {
@@ -23,27 +21,19 @@ export class BalancePage {
       this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
         if (data) {
           this.transactionList = data;
-          // let tokenSum = 0;
-          // let tokenRateSum = 0;
           this.transactionList = this.transactionList.filter(function (item) {
             return item.status == 1;
           });
-          // this.transactionList.forEach(function (item) {
-          //   if (item.status == 1) {
-          //     tokenSum = (tokenSum + (parseFloat(item.Debit) - parseFloat(item.Credit)));
-          //     tokenRateSum = (tokenRateSum + ((parseFloat(item.Debit) - parseFloat(item.Credit)) * parseFloat(item.Rate)))
-          //   }
-          // })
-          // this.walletTokenCount = (tokenSum).toFixed(2);
-          // this.walletExchangeValue = (tokenRateSum).toFixed(2);
-          this.walletTokenCount = (data[0].walletTokenCount).toFixed(2);
-          this.walletExchangeValue = (data[0].walletExchangeValue).toFixed(2);
-        } else {
-          this.walletTokenCount = 0;
-          this.walletExchangeValue = 0;
+          this.loginProvider.GetWalletDetails(userid).then((dataw) => {
+            if (dataw) {
+              this.walletTokenCount = parseFloat(dataw[0].WalletTokenCount).toFixed(2);
+              this.walletExchangeValue = parseFloat(dataw[0].WalletExchangeValue).toFixed(2);
+            }
+            refresher.complete();
+          });
         }
-        refresher.complete();
       });
+
     });
   }
 
@@ -52,85 +42,75 @@ export class BalancePage {
       this.loginProvider.GetWalletAndTransactions(userid).then((data) => {
         if (data) {
           this.transactionList = data;
-          // let tokenSum = 0;
-          // let tokenRateSum = 0;
           this.transactionList = this.transactionList.filter(function (item) {
             return item.status == 1;
           });
-          console.log(data);
-          
-          // this.transactionList.forEach(function (item) {
-          //   if (item.status == 1) {
-          //     tokenSum = (tokenSum + (parseFloat(item.Debit) - parseFloat(item.Credit)));
-          //     tokenRateSum = (tokenRateSum + ((parseFloat(item.Debit) - parseFloat(item.Credit)) * parseFloat(item.Rate)))
-          //   }
-          // })
-          // this.walletTokenCount = (tokenSum).toFixed(2);
-          // this.walletExchangeValue = (tokenRateSum).toFixed(2);
-          this.walletTokenCount = parseFloat(this.transactionList[0].walletTokenCount).toFixed(2);
-          this.walletExchangeValue = parseFloat(this.transactionList[0].walletExchangeValue).toFixed(2);
-        } else {
-          this.walletTokenCount = 0;
-          this.walletExchangeValue = 0;
+          this.loginProvider.GetWalletDetails(userid).then((dataw) => {
+            if (dataw) {
+              this.walletTokenCount = parseFloat(dataw[0].WalletTokenCount).toFixed(2);
+              this.walletExchangeValue = parseFloat(dataw[0].WalletExchangeValue).toFixed(2);
+            }
+          });
         }
       });
+
     });
   }
 
-  presentConfirm(idTicket) {
-    let alert = this.alertCtrl.create({
-      title: 'Confirm Transaction',
-      message: 'What do you want to do with this transaction?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked', idTicket);
-          }
-        },
-        {
-          text: 'Decline',
-          handler: () => {
-            this.loginProvider.SetTicketStatus(idTicket, 3).then((data) => {
-              console.log('data dec', data);
+  // presentConfirm(idTicket) {
+  //   let alert = this.alertCtrl.create({
+  //     title: 'Confirm Transaction',
+  //     message: 'What do you want to do with this transaction?',
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         role: 'cancel',
+  //         handler: () => {
+  //           console.log('Cancel clicked', idTicket);
+  //         }
+  //       },
+  //       {
+  //         text: 'Decline',
+  //         handler: () => {
+  //           this.loginProvider.SetTicketStatus(idTicket, 3).then((data) => {
+  //             console.log('data dec', data);
 
-              if (data) {
-                this.getTranList();
-                let toast = this.toastCtrl.create({
-                  message: 'Transaction Declined.',
-                  duration: 3000,
-                  position: 'top',
-                  cssClass: 'dark-trans',
-                  closeButtonText: 'OK',
-                  showCloseButton: true
-                });
-                toast.present();
-              }
-            });
-          }
-        },
-        {
-          text: 'Accept',
-          handler: () => {
-            this.loginProvider.SetTicketStatus(idTicket, 1).then((data) => {
-              if (data) {
-                this.getTranList();
-                let toast = this.toastCtrl.create({
-                  message: 'Transaction accepted successfully.',
-                  duration: 3000,
-                  position: 'top',
-                  cssClass: 'dark-trans',
-                  closeButtonText: 'OK',
-                  showCloseButton: true
-                });
-                toast.present();
-              }
-            });
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
+  //             if (data) {
+  //               this.getTranList();
+  //               let toast = this.toastCtrl.create({
+  //                 message: 'Transaction Declined.',
+  //                 duration: 3000,
+  //                 position: 'top',
+  //                 cssClass: 'dark-trans',
+  //                 closeButtonText: 'OK',
+  //                 showCloseButton: true
+  //               });
+  //               toast.present();
+  //             }
+  //           });
+  //         }
+  //       },
+  //       {
+  //         text: 'Accept',
+  //         handler: () => {
+  //           this.loginProvider.SetTicketStatus(idTicket, 1).then((data) => {
+  //             if (data) {
+  //               this.getTranList();
+  //               let toast = this.toastCtrl.create({
+  //                 message: 'Transaction accepted successfully.',
+  //                 duration: 3000,
+  //                 position: 'top',
+  //                 cssClass: 'dark-trans',
+  //                 closeButtonText: 'OK',
+  //                 showCloseButton: true
+  //               });
+  //               toast.present();
+  //             }
+  //           });
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   alert.present();
+  // }
 }

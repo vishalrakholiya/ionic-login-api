@@ -204,13 +204,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var BalancePage = (function () {
-    function BalancePage(navCtrl, navParams, loginProvider, toastCtrl, storage, alertCtrl) {
+    function BalancePage(navCtrl, navParams, loginProvider, toastCtrl, storage) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.loginProvider = loginProvider;
         this.toastCtrl = toastCtrl;
         this.storage = storage;
-        this.alertCtrl = alertCtrl;
     }
     BalancePage.prototype.ionViewDidLoad = function () {
         this.getTranList();
@@ -221,27 +220,17 @@ var BalancePage = (function () {
             _this.loginProvider.GetWalletAndTransactions(userid).then(function (data) {
                 if (data) {
                     _this.transactionList = data;
-                    // let tokenSum = 0;
-                    // let tokenRateSum = 0;
                     _this.transactionList = _this.transactionList.filter(function (item) {
                         return item.status == 1;
                     });
-                    // this.transactionList.forEach(function (item) {
-                    //   if (item.status == 1) {
-                    //     tokenSum = (tokenSum + (parseFloat(item.Debit) - parseFloat(item.Credit)));
-                    //     tokenRateSum = (tokenRateSum + ((parseFloat(item.Debit) - parseFloat(item.Credit)) * parseFloat(item.Rate)))
-                    //   }
-                    // })
-                    // this.walletTokenCount = (tokenSum).toFixed(2);
-                    // this.walletExchangeValue = (tokenRateSum).toFixed(2);
-                    _this.walletTokenCount = (data[0].walletTokenCount).toFixed(2);
-                    _this.walletExchangeValue = (data[0].walletExchangeValue).toFixed(2);
+                    _this.loginProvider.GetWalletDetails(userid).then(function (dataw) {
+                        if (dataw) {
+                            _this.walletTokenCount = parseFloat(dataw[0].WalletTokenCount).toFixed(2);
+                            _this.walletExchangeValue = parseFloat(dataw[0].WalletExchangeValue).toFixed(2);
+                        }
+                        refresher.complete();
+                    });
                 }
-                else {
-                    _this.walletTokenCount = 0;
-                    _this.walletExchangeValue = 0;
-                }
-                refresher.complete();
             });
         });
     };
@@ -251,96 +240,29 @@ var BalancePage = (function () {
             _this.loginProvider.GetWalletAndTransactions(userid).then(function (data) {
                 if (data) {
                     _this.transactionList = data;
-                    // let tokenSum = 0;
-                    // let tokenRateSum = 0;
                     _this.transactionList = _this.transactionList.filter(function (item) {
                         return item.status == 1;
                     });
-                    console.log(data);
-                    // this.transactionList.forEach(function (item) {
-                    //   if (item.status == 1) {
-                    //     tokenSum = (tokenSum + (parseFloat(item.Debit) - parseFloat(item.Credit)));
-                    //     tokenRateSum = (tokenRateSum + ((parseFloat(item.Debit) - parseFloat(item.Credit)) * parseFloat(item.Rate)))
-                    //   }
-                    // })
-                    // this.walletTokenCount = (tokenSum).toFixed(2);
-                    // this.walletExchangeValue = (tokenRateSum).toFixed(2);
-                    _this.walletTokenCount = parseFloat(_this.transactionList[0].walletTokenCount).toFixed(2);
-                    _this.walletExchangeValue = parseFloat(_this.transactionList[0].walletExchangeValue).toFixed(2);
-                }
-                else {
-                    _this.walletTokenCount = 0;
-                    _this.walletExchangeValue = 0;
+                    _this.loginProvider.GetWalletDetails(userid).then(function (dataw) {
+                        if (dataw) {
+                            _this.walletTokenCount = parseFloat(dataw[0].WalletTokenCount).toFixed(2);
+                            _this.walletExchangeValue = parseFloat(dataw[0].WalletExchangeValue).toFixed(2);
+                        }
+                    });
                 }
             });
         });
-    };
-    BalancePage.prototype.presentConfirm = function (idTicket) {
-        var _this = this;
-        var alert = this.alertCtrl.create({
-            title: 'Confirm Transaction',
-            message: 'What do you want to do with this transaction?',
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: function () {
-                        console.log('Cancel clicked', idTicket);
-                    }
-                },
-                {
-                    text: 'Decline',
-                    handler: function () {
-                        _this.loginProvider.SetTicketStatus(idTicket, 3).then(function (data) {
-                            console.log('data dec', data);
-                            if (data) {
-                                _this.getTranList();
-                                var toast = _this.toastCtrl.create({
-                                    message: 'Transaction Declined.',
-                                    duration: 3000,
-                                    position: 'top',
-                                    cssClass: 'dark-trans',
-                                    closeButtonText: 'OK',
-                                    showCloseButton: true
-                                });
-                                toast.present();
-                            }
-                        });
-                    }
-                },
-                {
-                    text: 'Accept',
-                    handler: function () {
-                        _this.loginProvider.SetTicketStatus(idTicket, 1).then(function (data) {
-                            if (data) {
-                                _this.getTranList();
-                                var toast = _this.toastCtrl.create({
-                                    message: 'Transaction accepted successfully.',
-                                    duration: 3000,
-                                    position: 'top',
-                                    cssClass: 'dark-trans',
-                                    closeButtonText: 'OK',
-                                    showCloseButton: true
-                                });
-                                toast.present();
-                            }
-                        });
-                    }
-                }
-            ]
-        });
-        alert.present();
     };
     return BalancePage;
 }());
 BalancePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-balance',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/balance/balance.html"*/'<ion-content class="balance-bg">\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"\n      refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <ion-item class="txtCenter">\n    <h4 class=\'black usd\'>{{walletExchangeValue}} USD</h4>\n    <h1 class=\'black btcoin\'>{{walletTokenCount}}</h1>\n    <h3 class=\'black ftb\'>FTB</h3>\n  </ion-item>\n  <ion-list>\n    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor=\'let tran of transactionList\'>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>sent to</p>\n      <h2 class="text-black cardno">gdsfg gf2g gfg1 dg12 g21g er12 ert1 yytr</h2>\n      <h2 class="amount">-0.0017</h2>\n    </ion-item>\n    <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n      </ion-avatar>\n      <p>received with</p>\n      <h2 class="text-black cardno">My Bitcoin address</h2>\n      <h2 class="amountget">+0.0029</h2>\n    </ion-item> -->\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/balance/balance.html"*/
+        selector: 'page-balance',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/balance/balance.html"*/'<ion-content class="balance-bg">\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"\n      refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <ion-item class="txtCenter">\n    <h4 class=\'black usd\'>{{walletExchangeValue}} USD</h4>\n    <h1 class=\'black btcoin\'>{{walletTokenCount}}</h1>\n    <h3 class=\'black ftb\'>FTB</h3>\n  </ion-item>\n  <ion-list>\n    <ion-item  *ngFor=\'let tran of transactionList\'>  <!-- (click)="presentConfirm(tran.idTicket)" -->\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>sent to</p>\n      <h2 class="text-black cardno">gdsfg gf2g gfg1 dg12 g21g er12 ert1 yytr</h2>\n      <h2 class="amount">-0.0017</h2>\n    </ion-item>\n    <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n      </ion-avatar>\n      <p>received with</p>\n      <h2 class="text-black cardno">My Bitcoin address</h2>\n      <h2 class="amountget">+0.0029</h2>\n    </ion-item> -->\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/balance/balance.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _f || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _e || Object])
 ], BalancePage);
 
-var _a, _b, _c, _d, _e, _f;
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=balance.js.map
 
 /***/ }),
@@ -377,6 +299,10 @@ var WalletReceivePage = (function () {
         this.alertCtrl = alertCtrl;
     }
     WalletReceivePage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.storage.get('LoggedUserId').then(function (userid) {
+            _this.userId = userid;
+        });
         this.getTranList();
     };
     WalletReceivePage.prototype.doRefresh = function (refresher) {
@@ -442,7 +368,7 @@ var WalletReceivePage = (function () {
                 {
                     text: 'Decline',
                     handler: function () {
-                        _this.loginProvider.SetTicketStatus(idTicket, 3).then(function (data) {
+                        _this.loginProvider.SetTicketStatus(idTicket, 3, _this.userId).then(function (data) {
                             if (data) {
                                 _this.getTranList();
                                 var toast = _this.toastCtrl.create({
@@ -461,7 +387,7 @@ var WalletReceivePage = (function () {
                 {
                     text: 'Accept',
                     handler: function () {
-                        _this.loginProvider.SetTicketStatus(idTicket, 1).then(function (data) {
+                        _this.loginProvider.SetTicketStatus(idTicket, 1, _this.userId).then(function (data) {
                             if (data) {
                                 _this.getTranList();
                                 var toast = _this.toastCtrl.create({
@@ -487,9 +413,10 @@ WalletReceivePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-wallet-receive',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-receive/wallet-receive.html"*/'<ion-content class="balance-bg">\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <ion-item class="txtCenter">\n    <h4 class=\'black usd\'>{{walletExchangeValue}} USD</h4>\n    <h1 class=\'black btcoin\'>{{walletTokenCount}}</h1>\n    <h3 class=\'black ftb\'>FTB</h3>\n  </ion-item>\n  <ion-list>\n    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor=\'let tran of transactionList\'>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n    </ion-item>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-receive/wallet-receive.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _f || Object])
 ], WalletReceivePage);
 
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=wallet-receive.js.map
 
 /***/ }),
@@ -660,7 +587,7 @@ var WalletSendPage = (function () {
                 {
                     text: 'Decline',
                     handler: function () {
-                        _this.loginProvider.SetTicketStatus(idTicket, 3).then(function (data) {
+                        _this.loginProvider.SetTicketStatus(idTicket, 3, _this.SenderID).then(function (data) {
                             console.log('data dec', data);
                             if (data) {
                                 _this.getTranList();
@@ -680,7 +607,7 @@ var WalletSendPage = (function () {
                 {
                     text: 'Accept',
                     handler: function () {
-                        _this.loginProvider.SetTicketStatus(idTicket, 1).then(function (data) {
+                        _this.loginProvider.SetTicketStatus(idTicket, 1, _this.SenderID).then(function (data) {
                             if (data) {
                                 _this.getTranList();
                                 var toast = _this.toastCtrl.create({
@@ -706,9 +633,10 @@ WalletSendPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-wallet-send',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-send/wallet-send.html"*/'<ion-content class="balance-bg">\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"\n      refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <p class="payto">Pay To</p>\n  <ion-item>\n    <ion-label>\n      <img class="ftbcoin" src="assets/img/FTB.png" />\n    </ion-label>\n    <ion-input style="color:black" [(ngModel)]=\'RecieverName\' (ionBlur)="checkBlur()" clearInput></ion-input>\n  </ion-item>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col col-6>\n        <p class="payto">Amount (FTB)</p>\n        <ion-item>\n          <ion-input type="number" [(ngModel)]=\'FTBAmount\' style="color:black" clearInput></ion-input>\n        </ion-item>\n      </ion-col>\n      <ion-col col-6>\n        <p class="payto">Amount (USD)</p>\n        <ion-item>\n          <ion-input type="number" [(ngModel)]=\'USDAmount\' style="color:black" clearInput></ion-input>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-12>\n        <button class="sendbtn" (click)="sendBtnClick()" ion-button>SEND</button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <ion-list>\n    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor=\'let tran of transactionList\'>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n    </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-send/wallet-send.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _f || Object])
 ], WalletSendPage);
 
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=wallet-send.js.map
 
 /***/ }),
@@ -1167,10 +1095,18 @@ var LoginProvider = (function () {
             });
         });
     };
-    LoginProvider.prototype.SetTicketStatus = function (id, value) {
+    LoginProvider.prototype.SetTicketStatus = function (id, value, userid) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            _this.http.get(_this.url + "/Home/SetTicketStatus?idTicket=" + id + "&value=" + value).subscribe(function (res) {
+            _this.http.get(_this.url + "/Home/SetTicketStatus?idTicket=" + id + "&value=" + value + "&UserId=" + userid).subscribe(function (res) {
+                resolve(res);
+            });
+        });
+    };
+    LoginProvider.prototype.GetWalletDetails = function (userid) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.http.get(_this.url + "/Home/GetWallets?UserId=" + userid).subscribe(function (res) {
                 resolve(res);
             });
         });
@@ -1179,9 +1115,10 @@ var LoginProvider = (function () {
 }());
 LoginProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
 ], LoginProvider);
 
+var _a;
 //# sourceMappingURL=login.js.map
 
 /***/ })

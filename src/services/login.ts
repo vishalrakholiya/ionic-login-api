@@ -68,20 +68,20 @@ export class LoginProvider {
       });
     })
   }
-  SetTicketStatus(id,value){
+  SetTicketStatus(id,value,userid){
     return new Promise((resolve,reject)=>{
-      this.http.get(`${this.url}/Home/SetTicketStatus?idTicket=${id}&value=${value}`).subscribe(res => {
+      this.http.get(`${this.url}/Home/SetTicketStatus?idTicket=${id}&value=${value}&UserId=${userid}`).subscribe(res => {
         resolve(res);
       });
     })
   }
-  // GetWallet(userid){
-  //   return new Promise((resolve,reject)=>{
-  //     this.http.get(`${this.url}/Home/GetWallet?UserId=${userid}`).subscribe(res => {
-  //       resolve(res);
-  //     });
-  //   })
-  // }
+  GetWalletDetails(userid){
+    return new Promise((resolve,reject)=>{
+      this.http.get(`${this.url}/Home/GetWallets?UserId=${userid}`).subscribe(res => {
+        resolve(res);
+      });
+    })
+  }
   // GetTicket(userid){
   //   return new Promise((resolve,reject)=>{
   //     this.http.get(`${this.url}/Home/GetTicket?UserId=${userid}`).subscribe(res => {
