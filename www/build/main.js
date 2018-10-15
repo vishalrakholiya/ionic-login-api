@@ -84,7 +84,7 @@ HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/home/home.html"*/'<!-- -->\n<ion-header>\n  <ion-navbar color="gray">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      <strong>Messages</strong>\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content #content>\n  <ion-refresher *ngIf="pageNo < TotalPage" (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <ion-list>\n\n    <ion-item *ngFor=\'let msg of trips\' (click)="msgClick(msg.idMessageSerial,msg.actionLink)">\n      <div *ngIf="msg.idMessageType == 2">\n        <p class="txtCenter">{{msg.DisplayName}}</p>\n        <img style="width:100%;height:100%;object-fit: cover;" src="{{msg.headerimge}}">\n        <p class="txtCenter">{{msg.txtMessage}}</p>\n      </div>\n      <ion-avatar item-start *ngIf="msg.idMessageType != 2">\n        <img src="{{msg.siteIcon}}">\n      </ion-avatar>\n      <img *ngIf="msg.idMessageType == 1" style="width:100%;height:100%;object-fit: cover;" src="{{msg.headerimge}}">\n      <h2 *ngIf="msg.idMessageType != 2" class="text-black">{{msg.Username}}@frontier<span class="msgAge">{{msg.Age}}</span></h2>\n      <p *ngIf="msg.idMessageType != 2">{{msg.txtMessage}}</p>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n      </ion-avatar>\n      <h2 class="text-black">Finn</h2>\n      <p>I\'ve had a pretty messed up day. If we just...</p>\n    </ion-item> -->\n  </ion-list>\n\n  <!-- <div class="chatBubble" *ngFor=\'let msg of trips\'>\n    <div class="chat-bubble right">\n      <div class="message">{{msg.txtMessage}}</div>\n      <div class="message-detail">\n          <span>{{msg.dateReceived}}</span>\n      </div>\n    </div>\n    <br>\n  </div> -->\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__["a" /* InAppBrowser */], __WEBPACK_IMPORTED_MODULE_3__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* PopoverController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__["a" /* InAppBrowser */], __WEBPACK_IMPORTED_MODULE_3__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* PopoverController */]])
 ], HomePage);
 
 //# sourceMappingURL=home.js.map
@@ -132,7 +132,7 @@ WalletPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-wallet',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet/wallet.html"*/'<ion-header>\n  <ion-navbar color="gray">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n    <ion-title>\n      <strong>FrontierCoin<ion-icon style="float: right;" name="md-more"></ion-icon><ion-icon style="float: right;padding-right: 15px;" name="md-barcode"></ion-icon></strong>\n    </ion-title>\n    <!-- \n     -->\n\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <super-tabs style="height: 100%">\n    <super-tab [root]="page1" title="receive"></super-tab>\n    <super-tab [root]="page2" title="balance"></super-tab>\n    <super-tab [root]="page3" title="send"></super-tab>\n  </super-tabs>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet/wallet.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */]])
 ], WalletPage);
 
 //# sourceMappingURL=wallet.js.map
@@ -259,7 +259,7 @@ BalancePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-balance',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/balance/balance.html"*/'<ion-content class="balance-bg">\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"\n      refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <ion-item class="txtCenter">\n    <h4 class=\'black usd\'>{{walletExchangeValue}} USD</h4>\n    <h1 class=\'black btcoin\'>{{walletTokenCount}}</h1>\n    <h3 class=\'black ftb\'>FTB</h3>\n  </ion-item>\n  <ion-list>\n    <ion-item  *ngFor=\'let tran of transactionList\'>  <!-- (click)="presentConfirm(tran.idTicket)" -->\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>sent to</p>\n      <h2 class="text-black cardno">gdsfg gf2g gfg1 dg12 g21g er12 ert1 yytr</h2>\n      <h2 class="amount">-0.0017</h2>\n    </ion-item>\n    <ion-item>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n      </ion-avatar>\n      <p>received with</p>\n      <h2 class="text-black cardno">My Bitcoin address</h2>\n      <h2 class="amountget">+0.0029</h2>\n    </ion-item> -->\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/balance/balance.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
 ], BalancePage);
 
 //# sourceMappingURL=balance.js.map
@@ -412,7 +412,7 @@ WalletReceivePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-wallet-receive',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-receive/wallet-receive.html"*/'<ion-content class="balance-bg">\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <ion-item class="txtCenter">\n    <h4 class=\'black usd\'>{{walletExchangeValue}} USD</h4>\n    <h1 class=\'black btcoin\'>{{walletTokenCount}}</h1>\n    <h3 class=\'black ftb\'>FTB</h3>\n  </ion-item>\n  <ion-list>\n    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor=\'let tran of transactionList\'>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n    </ion-item>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-receive/wallet-receive.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
 ], WalletReceivePage);
 
 //# sourceMappingURL=wallet-receive.js.map
@@ -442,61 +442,113 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var WalletSendPage = (function () {
-    function WalletSendPage(navCtrl, navParams, loginProvider, alertCtrl, toastCtrl, storage) {
+    function WalletSendPage(navCtrl, navParams, loginProvider, alertCtrl, toastCtrl, storage, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.loginProvider = loginProvider;
         this.alertCtrl = alertCtrl;
         this.toastCtrl = toastCtrl;
         this.storage = storage;
+        this.loadingCtrl = loadingCtrl;
         this.RecieverName = '';
         this.SenderName = '';
-        this.FTBAmount = '';
-        this.USDAmount = '';
+        this.FtbDisable = true;
+        this.SendBtnDisable = true;
     }
     WalletSendPage.prototype.ionViewDidLoad = function () {
         var _this = this;
         this.storage.get('LoggedUserId').then(function (userid) {
-            _this.SenderID = userid;
+            _this.SenderID = parseInt(userid);
         });
         this.storage.get('LoggedUserName').then(function (username) {
             _this.SenderName = username;
         });
+        this.FtbDisable = true;
+        this.SendBtnDisable = true;
         this.getTranList();
+    };
+    WalletSendPage.prototype.checkFtbBlur = function () {
+        var _this = this;
+        if (this.RecieverName && parseFloat(this.FTBAmount) > 0) {
+            this.loading = this.loadingCtrl.create({ spinner: 'bubbles' });
+            this.loading.present();
+            this.SendBtnDisable = false;
+            this.loginProvider.GetWalletDetails(this.SenderID).then(function (data) {
+                if (data && data[0]) {
+                    _this.USDAmount = (parseFloat(data[0].WalletExchangeRate) * parseFloat(_this.FTBAmount)).toFixed(2);
+                }
+                _this.loading.dismiss();
+            }).catch(function (err) {
+                alert(err);
+                _this.loading.dismiss();
+            });
+        }
+        else {
+            this.SendBtnDisable = true;
+        }
     };
     WalletSendPage.prototype.checkBlur = function () {
         var _this = this;
-        this.loginProvider.GetReceiverId(this.RecieverName).then(function (data) {
-            if (data) {
-                if (data == 0 || data == '0') {
-                    _this.RecieverName = "";
-                    var toast = _this.toastCtrl.create({
-                        message: 'Receiver not found.',
-                        duration: 3000,
-                        position: 'top',
-                        cssClass: 'dark-trans',
-                        closeButtonText: 'OK',
-                        showCloseButton: true
-                    });
-                    toast.present();
+        if (this.RecieverName == '' || this.RecieverName == null) {
+            this.SendBtnDisable = true;
+        }
+        else {
+            this.loading = this.loadingCtrl.create({ spinner: 'bubbles' });
+            this.loading.present();
+            this.loginProvider.GetReceiverId(this.RecieverName).then(function (data) {
+                if (data) {
+                    if (data == 0 || data == '0') {
+                        _this.RecieverName = "";
+                        var toast = _this.toastCtrl.create({
+                            message: 'Player account was invalid.',
+                            duration: 3000,
+                            position: 'top',
+                            cssClass: 'dark-trans',
+                            closeButtonText: 'OK',
+                            showCloseButton: true
+                        });
+                        toast.present();
+                        _this.SendBtnDisable = true;
+                    }
+                    else if (data == _this.SenderID) {
+                        _this.RecieverName = "";
+                        var toast = _this.toastCtrl.create({
+                            message: 'opps, its your account..',
+                            duration: 3000,
+                            position: 'top',
+                            cssClass: 'dark-trans',
+                            closeButtonText: 'OK',
+                            showCloseButton: true
+                        });
+                        toast.present();
+                        _this.SendBtnDisable = true;
+                    }
+                    else {
+                        var toast = _this.toastCtrl.create({
+                            message: 'Player account validated.',
+                            duration: 3000,
+                            position: 'top',
+                            cssClass: 'dark-trans',
+                            closeButtonText: 'OK',
+                            showCloseButton: true
+                        });
+                        _this.FtbDisable = false;
+                        if (parseFloat(_this.FTBAmount) > 0)
+                            _this.SendBtnDisable = false;
+                        else
+                            _this.SendBtnDisable = true;
+                        toast.present();
+                        _this.RecieverID = data;
+                        _this.RecieverID = parseInt(_this.RecieverID);
+                    }
+                    _this.loading.dismiss();
+                    _this.loading.enableBack();
                 }
-                else if (data == _this.SenderID) {
-                    _this.RecieverName = "";
-                    var toast = _this.toastCtrl.create({
-                        message: 'opps, its your username..',
-                        duration: 3000,
-                        position: 'top',
-                        cssClass: 'dark-trans',
-                        closeButtonText: 'OK',
-                        showCloseButton: true
-                    });
-                    toast.present();
-                }
-                else {
-                    _this.RecieverID = data;
-                }
-            }
-        });
+            }).catch(function (err) {
+                _this.loading.dismiss();
+                alert(err);
+            });
+        }
     };
     WalletSendPage.prototype.sendBtnClick = function () {
         var _this = this;
@@ -512,7 +564,9 @@ var WalletSendPage = (function () {
             toast.present();
         }
         else {
-            this.loginProvider.SendTokens(this.SenderID, this.RecieverID, this.FTBAmount, this.SenderName, this.RecieverName).then(function (data) {
+            this.loading = this.loadingCtrl.create({ spinner: 'bubbles' });
+            this.loading.present();
+            this.loginProvider.SendTokens(this.SenderID, this.RecieverID, parseInt(this.FTBAmount), this.SenderName, this.RecieverName).then(function (data) {
                 if (data == "Success") {
                     var toast = _this.toastCtrl.create({
                         message: 'Tokens send successfully.',
@@ -522,6 +576,7 @@ var WalletSendPage = (function () {
                         closeButtonText: 'OK',
                         showCloseButton: true
                     });
+                    _this.loading.dismiss();
                     toast.present();
                     _this.getTranList();
                     _this.RecieverName = '';
@@ -537,8 +592,12 @@ var WalletSendPage = (function () {
                         closeButtonText: 'OK',
                         showCloseButton: true
                     });
+                    _this.loading.dismiss();
                     toast.present();
                 }
+            }).catch(function (err) {
+                _this.loading.dismiss();
+                alert(err);
             });
         }
     };
@@ -629,9 +688,10 @@ var WalletSendPage = (function () {
 }());
 WalletSendPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-wallet-send',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-send/wallet-send.html"*/'<ion-content class="balance-bg">\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"\n      refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <p class="payto">Pay To</p>\n  <ion-item>\n    <ion-label>\n      <img class="ftbcoin" src="assets/img/FTB.png" />\n    </ion-label>\n    <ion-input style="color:black" [(ngModel)]=\'RecieverName\' (ionBlur)="checkBlur()" clearInput></ion-input>\n  </ion-item>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col col-6>\n        <p class="payto">Amount (FTB)</p>\n        <ion-item>\n          <ion-input type="number" [(ngModel)]=\'FTBAmount\' style="color:black" clearInput></ion-input>\n        </ion-item>\n      </ion-col>\n      <ion-col col-6>\n        <p class="payto">Amount (USD)</p>\n        <ion-item>\n          <ion-input type="number" [(ngModel)]=\'USDAmount\' style="color:black" clearInput></ion-input>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-12>\n        <button class="sendbtn" (click)="sendBtnClick()" ion-button>SEND</button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <ion-list>\n    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor=\'let tran of transactionList\'>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n    </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-send/wallet-send.html"*/
+        selector: 'page-wallet-send',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-send/wallet-send.html"*/'<ion-content class="balance-bg">\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"\n      refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <p class="payto">Pay To</p>\n  <ion-item>\n    <ion-label>\n      <img class="ftbcoin" src="assets/img/FTB.png" />\n    </ion-label>\n    <ion-input style="color:black" [(ngModel)]=\'RecieverName\' (ionBlur)="checkBlur()" clearInput></ion-input>\n  </ion-item>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col col-6>\n        <p class="payto">Amount (FTB)</p>\n        <ion-item>\n          <ion-input type="number" [disabled]="FtbDisable" (ionBlur)="checkFtbBlur()"  [(ngModel)]=\'FTBAmount\' style="color:black" clearInput></ion-input>\n        </ion-item>\n      </ion-col>\n      <ion-col col-6>\n        <p class="payto">Amount (USD)</p>\n        <ion-item>\n          <ion-input type="number" [disabled]="true" [(ngModel)]=\'USDAmount\' style="color:black" clearInput></ion-input>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-12>\n        <button class="sendbtn" [disabled]="SendBtnDisable"  (click)="sendBtnClick()" ion-button>SEND</button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <ion-list>\n    <ion-item (click)="presentConfirm(tran.idTicket)" *ngFor=\'let tran of transactionList\'>\n      <ion-avatar item-start>\n        <img src="assets/img/ionic3-ico.png">\n        <ion-icon *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="battery" name="ios-battery-dead"></ion-icon>\n        <ion-icon *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="battery" name="ios-battery-full"></ion-icon>\n      </ion-avatar>\n      <p>{{tran.TicketTypeName}}<span style="float: right;">{{tran.TDate}}</span></p>\n      <h2 class="text-black cardno">{{tran.Memo}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'BUY\' || tran.TicketTypeName == \'SEND\'" class="amountfull">- {{tran.Credit}}</h2>\n      <h2 *ngIf="tran.TicketTypeName == \'SELL\' || tran.TicketTypeName == \'RECEIVE\'" class="amountget">+ {{tran.Debit}}</h2>\n    </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/wallet-send/wallet-send.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* LoadingController */]])
 ], WalletSendPage);
 
 //# sourceMappingURL=wallet-send.js.map
@@ -750,7 +810,7 @@ LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-login',template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/pages/login/login.html"*/'<!-- -->\n<ion-content padding class="animated fadeIn login auth-page">\n  <div class="login-content">\n\n    <!-- Logo -->\n    <div padding-horizontal text-center class="animated fadeInDown">\n      <div class="logo"></div>\n    </div>\n    <ion-item class="inputbox">\n      <ion-label class="lblicon">\n        <ion-icon name="person"></ion-icon>\n      </ion-label>\n      <ion-input [(ngModel)]=\'email\' style="font-style: italic;" placeholder="Enter Username" clearInput></ion-input>\n    </ion-item>\n    <ion-item class="inputbox">\n      <ion-label class="lblicon">\n        <ion-icon name="ios-key"></ion-icon>\n      </ion-label>\n      <ion-input type="password" style="font-style: italic;" [(ngModel)]=\'password\' placeholder="Enter Password" clearInput></ion-input>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-label floating>\n        <ion-icon name="person" item-start class="text-primary"></ion-icon>\n        Enter UserName\n      </ion-label>\n      <ion-input type="email" [(ngModel)]=\'email\'></ion-input>\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label>\n        <ion-icon name="ios-key" item-start class="text-primary"></ion-icon>\n        Enter Password\n      </ion-label>\n      <ion-input type="password" [(ngModel)]=\'password\'></ion-input>\n    </ion-item> -->\n\n    <ion-item class="checkboxline">\n      <ion-label class="logged">Keep me logged in</ion-label>\n      <ion-checkbox style="margin-right:15px;margin-left: 0px;" [(ngModel)]="RememberMe"></ion-checkbox>\n      <button ion-button icon-start block color="dark" tappable (click)="login()" item-right> LOGIN >> </button>\n    </ion-item>\n    <div>\n\n      <div style="margin-right:16px;" text-right>\n        <span style="font-style: italic;" ion-text color="secondary" tappable (click)="register()"><span style="color: white;">Or</span> <strong>Register</strong></span>\n      </div>\n\n\n    </div>\n  </div>\n</ion-content>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/pages/login/login.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__ionic_native_in_app_browser__["a" /* InAppBrowser */], __WEBPACK_IMPORTED_MODULE_4__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* MenuController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* ToastController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__ionic_native_in_app_browser__["a" /* InAppBrowser */], __WEBPACK_IMPORTED_MODULE_4__services_login__["a" /* LoginProvider */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* MenuController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */]])
 ], LoginPage);
 
 //# sourceMappingURL=login.js.map
@@ -983,13 +1043,13 @@ var MyApp = (function () {
     return MyApp;
 }());
 __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Nav */]),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Nav */])
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* Nav */]),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* Nav */])
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/vishal/Desktop/ionic-login-api/src/app/app.html"*/'<ion-menu side="left" id="authenticated" [content]="content">\n  <ion-header>\n    <ion-toolbar class="user-profile">\n\n      <ion-grid>\n        <ion-row>\n          <ion-col col-12>\n              <img style="width: 90%;padding-top: 10px;padding-left: 5px;" src="assets/img/frontierlogo.png">\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content color="primary">\n\n    <ion-list class="user-list">\n      <button ion-item menuClose class="text-1x" *ngFor="let menuItem of appMenuItems" (click)="openPage(menuItem)">\n        <ion-icon item-left [name]="menuItem.icon" color="gray"></ion-icon>\n        <span ion-text color="gray">{{menuItem.title}}</span>\n      </button>\n      <button ion-item menuClose class="text-1x" *ngFor="let DmenuItem of DynamicappMenuItems" (click)="openLink(DmenuItem.urllink)">\n        <ion-icon item-left [name]="DmenuItem.icon" color="gray"></ion-icon>\n        <span ion-text color="gray">{{DmenuItem.title}}</span>\n      </button>\n    </ion-list>\n    <ion-list class="user-list">\n      <button ion-item menuClose class="text-1x" (click)="logout()">\n        <ion-icon item-left name="md-log-out"  color="gray"></ion-icon>\n        <span ion-text color="gray">LOG OUT</span>\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/vishal/Desktop/ionic-login-api/src/app/app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* Platform */],
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* Platform */],
         __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */],
         __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
         __WEBPACK_IMPORTED_MODULE_4__ionic_native_keyboard__["a" /* Keyboard */],
