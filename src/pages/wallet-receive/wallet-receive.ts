@@ -20,6 +20,7 @@ export class WalletReceivePage {
     this.storage.get('LoggedUserId').then((userid) => {
       this.userId = userid;
     })
+    console.log('in receive screen');
     this.getTranList();
   }
   doRefresh(refresher) {

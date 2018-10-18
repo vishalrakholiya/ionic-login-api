@@ -213,6 +213,7 @@ var BalancePage = (function () {
     }
     BalancePage.prototype.ionViewDidLoad = function () {
         this.getTranList();
+        console.log('in balance screen');
     };
     BalancePage.prototype.doRefresh = function (refresher) {
         var _this = this;
@@ -302,6 +303,7 @@ var WalletReceivePage = (function () {
         this.storage.get('LoggedUserId').then(function (userid) {
             _this.userId = userid;
         });
+        console.log('in receive screen');
         this.getTranList();
     };
     WalletReceivePage.prototype.doRefresh = function (refresher) {
@@ -463,6 +465,7 @@ var WalletSendPage = (function () {
         this.storage.get('LoggedUserName').then(function (username) {
             _this.SenderName = username;
         });
+        console.log('in send screen');
         this.FtbDisable = true;
         this.SendBtnDisable = true;
         this.getTranList();
@@ -470,7 +473,7 @@ var WalletSendPage = (function () {
     WalletSendPage.prototype.checkFtbBlur = function () {
         var _this = this;
         if (this.RecieverName && parseFloat(this.FTBAmount) > 0) {
-            this.loading = this.loadingCtrl.create({ spinner: 'bubbles' });
+            this.loading = this.loadingCtrl.create({ spinner: 'bubbles', cssClass: 'my-loading-class' });
             this.loading.present();
             this.SendBtnDisable = false;
             this.loginProvider.GetWalletDetails(this.SenderID).then(function (data) {
@@ -485,20 +488,28 @@ var WalletSendPage = (function () {
         }
         else {
             this.SendBtnDisable = true;
+            this.USDAmount = '';
         }
     };
     WalletSendPage.prototype.checkBlur = function () {
         var _this = this;
         if (this.RecieverName == '' || this.RecieverName == null) {
             this.SendBtnDisable = true;
+            this.FtbDisable = true;
+            this.FTBAmount = '';
+            this.USDAmount = '';
         }
         else {
-            this.loading = this.loadingCtrl.create({ spinner: 'bubbles' });
+            this.loading = this.loadingCtrl.create({ spinner: 'bubbles', cssClass: 'my-loading-class' });
             this.loading.present();
             this.loginProvider.GetReceiverId(this.RecieverName).then(function (data) {
                 if (data) {
                     if (data == 0 || data == '0') {
                         _this.RecieverName = "";
+                        _this.SendBtnDisable = true;
+                        _this.FtbDisable = true;
+                        _this.FTBAmount = '';
+                        _this.USDAmount = '';
                         var toast = _this.toastCtrl.create({
                             message: 'Player account was invalid.',
                             duration: 3000,
@@ -508,10 +519,13 @@ var WalletSendPage = (function () {
                             showCloseButton: true
                         });
                         toast.present();
-                        _this.SendBtnDisable = true;
                     }
                     else if (data == _this.SenderID) {
                         _this.RecieverName = "";
+                        _this.SendBtnDisable = true;
+                        _this.FtbDisable = true;
+                        _this.FTBAmount = '';
+                        _this.USDAmount = '';
                         var toast = _this.toastCtrl.create({
                             message: 'opps, its your account..',
                             duration: 3000,
@@ -521,7 +535,6 @@ var WalletSendPage = (function () {
                             showCloseButton: true
                         });
                         toast.present();
-                        _this.SendBtnDisable = true;
                     }
                     else {
                         var toast = _this.toastCtrl.create({
@@ -564,7 +577,7 @@ var WalletSendPage = (function () {
             toast.present();
         }
         else {
-            this.loading = this.loadingCtrl.create({ spinner: 'bubbles' });
+            this.loading = this.loadingCtrl.create({ spinner: 'bubbles', cssClass: 'my-loading-class' });
             this.loading.present();
             this.loginProvider.SendTokens(this.SenderID, this.RecieverID, parseInt(this.FTBAmount), this.SenderName, this.RecieverName).then(function (data) {
                 if (data == "Success") {
@@ -579,6 +592,8 @@ var WalletSendPage = (function () {
                     _this.loading.dismiss();
                     toast.present();
                     _this.getTranList();
+                    _this.SendBtnDisable = true;
+                    _this.FtbDisable = true;
                     _this.RecieverName = '';
                     _this.FTBAmount = '';
                     _this.USDAmount = '';

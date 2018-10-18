@@ -23,7 +23,7 @@ export class WalletSendPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, private alertCtrl: AlertController,
     public toastCtrl: ToastController, private storage: Storage, public loadingCtrl: LoadingController
   ) {
-    
+
 
   }
 
@@ -34,7 +34,8 @@ export class WalletSendPage {
     this.storage.get('LoggedUserName').then((username) => {
       this.SenderName = username;
     });
-
+    console.log('in send screen');
+    
     this.FtbDisable = true;
     this.SendBtnDisable = true;
     this.getTranList();
@@ -42,7 +43,7 @@ export class WalletSendPage {
 
   checkFtbBlur() {
     if (this.RecieverName && parseFloat(this.FTBAmount) > 0) {
-      this.loading = this.loadingCtrl.create({ spinner: 'bubbles' });
+      this.loading = this.loadingCtrl.create({ spinner: 'bubbles', cssClass: 'my-loading-class' });
       this.loading.present();
       this.SendBtnDisable = false;
       this.loginProvider.GetWalletDetails(this.SenderID).then((data) => {
@@ -56,19 +57,27 @@ export class WalletSendPage {
       })
     } else {
       this.SendBtnDisable = true;
+      this.USDAmount = '';
     }
   }
 
   checkBlur() {
     if (this.RecieverName == '' || this.RecieverName == null) {
       this.SendBtnDisable = true;
+      this.FtbDisable = true;
+      this.FTBAmount = '';
+      this.USDAmount = '';
     } else {
-      this.loading = this.loadingCtrl.create({ spinner: 'bubbles' });
+      this.loading = this.loadingCtrl.create({ spinner: 'bubbles', cssClass: 'my-loading-class' });
       this.loading.present();
       this.loginProvider.GetReceiverId(this.RecieverName).then((data) => {
         if (data) {
           if (data == 0 || data == '0') {
             this.RecieverName = "";
+            this.SendBtnDisable = true;
+            this.FtbDisable = true;
+            this.FTBAmount = '';
+            this.USDAmount = '';
             let toast = this.toastCtrl.create({
               message: 'Player account was invalid.',
               duration: 3000,
@@ -78,9 +87,12 @@ export class WalletSendPage {
               showCloseButton: true
             });
             toast.present();
-            this.SendBtnDisable = true;
           } else if (data == this.SenderID) {
             this.RecieverName = "";
+            this.SendBtnDisable = true;
+            this.FtbDisable = true;
+            this.FTBAmount = '';
+            this.USDAmount = '';
             let toast = this.toastCtrl.create({
               message: 'opps, its your account..',
               duration: 3000,
@@ -90,7 +102,6 @@ export class WalletSendPage {
               showCloseButton: true
             });
             toast.present();
-            this.SendBtnDisable = true;
           } else {
             let toast = this.toastCtrl.create({
               message: 'Player account validated.',
@@ -132,7 +143,7 @@ export class WalletSendPage {
       toast.present();
     }
     else {
-      this.loading = this.loadingCtrl.create({ spinner: 'bubbles' });
+      this.loading = this.loadingCtrl.create({ spinner: 'bubbles', cssClass: 'my-loading-class' });
       this.loading.present();
       this.loginProvider.SendTokens(this.SenderID, this.RecieverID, parseInt(this.FTBAmount), this.SenderName, this.RecieverName).then((data) => {
         if (data == "Success") {
@@ -147,6 +158,8 @@ export class WalletSendPage {
           this.loading.dismiss();
           toast.present();
           this.getTranList();
+          this.SendBtnDisable = true;
+          this.FtbDisable = true;
           this.RecieverName = '';
           this.FTBAmount = '';
           this.USDAmount = '';

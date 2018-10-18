@@ -27294,6 +27294,12 @@ ion-icon[ng-reflect-disabled="true"] {
   animation-name: fadeInDown;
 }
 
+ion-loading.my-loading-class .loading-wrapper {
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 page-balance .balance-bg,
 .balance .balance-bg {
   background: #f3f3f3;

@@ -15,6 +15,7 @@ export class BalancePage {
 
   ionViewDidLoad() {
     this.getTranList();
+    console.log('in balance screen');
   }
   doRefresh(refresher) {
     this.storage.get('LoggedUserId').then((userid) => {
