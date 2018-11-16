@@ -46,12 +46,13 @@ export class WalletSendPage {
   }
 
   checkFtbBlur() {
-    if (this.RecieverName && parseFloat(this.FTBAmount) > 0) {
+    this.FTBAmount = parseInt(this.FTBAmount)
+    if (this.RecieverName && this.FTBAmount > 0) {
       this.loading = this.loadingCtrl.create({ spinner: 'bubbles', cssClass: 'my-loading-class' });
       this.loading.present();
       this.SendBtnDisable = false;
       if (this.WalletExchangeRate) {
-        this.USDAmount = (parseFloat(this.WalletExchangeRate) * parseFloat(this.FTBAmount)).toFixed(2);
+        this.USDAmount = (parseFloat(this.WalletExchangeRate) * this.FTBAmount).toFixed(2);
         this.loading.dismiss();
       } else {
         this.loading.dismiss();
