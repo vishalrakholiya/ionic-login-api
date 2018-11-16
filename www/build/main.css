@@ -27609,3 +27609,23 @@ page-wallet-send .amountfull,
   color: red;
   font-weight: bold;
 }
+
+page-wallet-send .checkbtn,
+.wallet-send .checkbtn {
+  padding: 5px;
+  margin: 0px !important;
+  margin-top: 16px !important;
+  left: 0px;
+}
+
+page-wallet-send .input-md[clearInput] .text-input,
+.wallet-send .input-md[clearInput] .text-input {
+  padding: 0px;
+  width: 100%;
+  color: black;
+}
+
+page-wallet-send .input-md .text-input-clear-icon,
+.wallet-send .input-md .text-input-clear-icon {
+  right: -9px !important;
+}

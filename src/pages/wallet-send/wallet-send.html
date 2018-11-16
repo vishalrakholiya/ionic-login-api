@@ -4,32 +4,51 @@
       refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <p class="payto">Pay To</p>
+  <!-- <p class="payto">Pay To</p>
   <ion-item>
     <ion-label>
       <img class="ftbcoin" src="assets/img/FTB.png" />
     </ion-label>
-    <ion-input style="color:black" [(ngModel)]='RecieverName' (ionBlur)="checkBlur()" clearInput></ion-input>
-  </ion-item>
+    <ion-input style="color:black" [(ngModel)]='RecieverName' (ionBlur)="checkBlur()" clearInput>
+    </ion-input>
+    <button class="sendbtn checkbtn"  ion-button>CHECK</button>
+  </ion-item> -->
 
   <ion-grid>
+    <p class="payto">Pay To</p>
     <ion-row>
-      <ion-col col-6>
-        <p class="payto">Amount (FTB)</p>
+      <ion-col col-10>
         <ion-item>
-          <ion-input type="number" [disabled]="FtbDisable" (ionBlur)="checkFtbBlur()"  [(ngModel)]='FTBAmount' style="color:black" clearInput></ion-input>
+          <ion-label>
+            <img class="ftbcoin" src="assets/img/FTB.png" />
+          </ion-label>
+          <ion-input [(ngModel)]='RecieverName' class="inputpadd0" (ionBlur)="checkBlur()" clearInput> </ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-6>
+      <ion-col col-2>
+          <button class="sendbtn checkbtn" (click)="nameCheckClick()"  ion-button>CHECK</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+        <p class="payto">Amount (FTB)</p>
+        <ion-item>
+          <ion-input type="number" [disabled]="FtbDisable" class="inputpadd0" (ionBlur)="checkFtbBlur()" [(ngModel)]='FTBAmount' clearInput></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2>
+        <button class="sendbtn checkbtn" (click)="ftbCheckClick()" ion-button>CHECK</button>
+      </ion-col>
+      <ion-col col-5>
         <p class="payto">Amount (USD)</p>
         <ion-item>
-          <ion-input type="number" [disabled]="true" [(ngModel)]='USDAmount' style="color:black" clearInput></ion-input>
+          <ion-input type="number" [disabled]="true" [(ngModel)]='USDAmount' class="inputpadd0" clearInput></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-12>
-        <button class="sendbtn" [disabled]="SendBtnDisable"  (click)="sendBtnClick()" ion-button>SEND</button>
+        <button class="sendbtn" [disabled]="SendBtnDisable" (click)="sendBtnClick()" ion-button>SEND</button>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -45,5 +64,5 @@
       <h2 *ngIf="tran.TicketTypeName == 'BUY' || tran.TicketTypeName == 'SEND'" class="amountfull">- {{tran.Credit}}</h2>
       <h2 *ngIf="tran.TicketTypeName == 'SELL' || tran.TicketTypeName == 'RECEIVE'" class="amountget">+ {{tran.Debit}}</h2>
     </ion-item>
-    </ion-list>
+  </ion-list>
 </ion-content>

@@ -19,6 +19,7 @@ export class WalletSendPage {
   public SendBtnDisable: boolean = true;
   public loading: any;
   public ExchangeRate: any;
+  public WalletExchangeRate: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, private alertCtrl: AlertController,
     public toastCtrl: ToastController, private storage: Storage, public loadingCtrl: LoadingController
@@ -30,12 +31,15 @@ export class WalletSendPage {
   ionViewDidLoad() {
     this.storage.get('LoggedUserId').then((userid) => {
       this.SenderID = parseInt(userid);
+      this.loginProvider.GetWalletDetails(this.SenderID).then((data) => {
+        this.WalletExchangeRate = data[0].WalletExchangeRate;
+      })
     })
     this.storage.get('LoggedUserName').then((username) => {
       this.SenderName = username;
     });
     console.log('in send screen');
-    
+
     this.FtbDisable = true;
     this.SendBtnDisable = true;
     this.getTranList();
@@ -46,21 +50,23 @@ export class WalletSendPage {
       this.loading = this.loadingCtrl.create({ spinner: 'bubbles', cssClass: 'my-loading-class' });
       this.loading.present();
       this.SendBtnDisable = false;
-      this.loginProvider.GetWalletDetails(this.SenderID).then((data) => {
-        if (data && data[0]) {
-          this.USDAmount = (parseFloat(data[0].WalletExchangeRate) * parseFloat(this.FTBAmount)).toFixed(2);
-        }
+      if (this.WalletExchangeRate) {
+        this.USDAmount = (parseFloat(this.WalletExchangeRate) * parseFloat(this.FTBAmount)).toFixed(2);
         this.loading.dismiss();
-      }).catch(err => {
-        alert(err)
+      } else {
         this.loading.dismiss();
-      })
+      }
     } else {
       this.SendBtnDisable = true;
       this.USDAmount = '';
     }
   }
-
+  nameCheckClick() {
+    this.checkBlur();
+  }
+  ftbCheckClick() {
+    this.checkFtbBlur();
+  }
   checkBlur() {
     if (this.RecieverName == '' || this.RecieverName == null) {
       this.SendBtnDisable = true;
